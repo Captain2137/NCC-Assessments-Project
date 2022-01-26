@@ -10,8 +10,8 @@
 - team member 3
 
 #### Visualization
--Samuel Bean
--Jesse Angelopolus
+- Samuel Bean
+- Jesse Angelopolus
 -
 
 
