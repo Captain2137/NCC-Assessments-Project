@@ -8,16 +8,10 @@
 #### Computation
 =======
 ### Computation
->>>>>>> ebb443cbe12b3902e8a7ac8c71274239f4bb8740
-
 - Mitchell Boone
 - team member 2
 - team member 3
 
-<<<<<<< HEAD
-#### User Interface
-
-- Jacob Briand
 =======
 ### Visualization
 
