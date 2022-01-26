@@ -36,6 +36,8 @@ Clone solution into VS2019
 
 *If VS2019 can't find boost header files*
 
+![include](doc/cpp-include.png "include")
+
 ![include](doc/include.png "include")
 
 - No precompiled headers  
