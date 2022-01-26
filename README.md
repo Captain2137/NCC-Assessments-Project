@@ -12,7 +12,6 @@
 #### Visualization
 - Samuel Bean
 - Jesse Angelopolus
--
 
 
 #### User Interface
