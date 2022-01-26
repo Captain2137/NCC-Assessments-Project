@@ -4,17 +4,24 @@
 
 ### Task
 
-####Computation
+### Computation
 
 - Mitchell Boone
 - team member 2
 - team member 3
 
-## Visualization
+### Visualization
 
 -Samuel Bean
 -
 -
+
+
+### User Interface
+
+- Samantha Hughson
+- team member 2
+- team member 3
 
 ## Features
 
