@@ -10,6 +10,12 @@
 - team member 2
 - team member 3
 
+## Visualization
+
+-Samuel Bean
+-
+-
+
 ## Features
 
 1. Dual-mode - will accept command line arguments, if none, will offer a GUI
