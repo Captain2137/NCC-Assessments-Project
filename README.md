@@ -4,9 +4,15 @@
 
 ### Task
 
-####Computation
+#### Computation
 
 - Mitchell Boone
+- team member 2
+- team member 3
+
+#### User Interface
+
+- Jacob Briand
 - team member 2
 - team member 3
 
