@@ -22,7 +22,7 @@
 ### Visualization
 
 -Samuel Bean
--
+-Jesse Angelopolus
 -
 
 
