@@ -4,24 +4,18 @@
 
 ### Task
 
-<<<<<<< HEAD
 #### Computation
-=======
-### Computation
 - Mitchell Boone
 - team member 2
 - team member 3
 
-=======
-### Visualization
-
+#### Visualization
 -Samuel Bean
 -Jesse Angelopolus
 -
 
 
-### User Interface
-
+#### User Interface
 - Samantha Hughson
 - Jacob Briand
 - Simeon Grosu
