@@ -4,8 +4,11 @@
 
 ### Task
 
-- team member 1
+####Computation
+
+- Mitchell Boone
 - team member 2
+- team member 3
 
 ## Features
 
