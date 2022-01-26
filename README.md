@@ -2,13 +2,15 @@
 
 ## Team
 
-- one
-- two
+### Task
+
+- team member 1
+- team member 2
 
 ## Features
 
 1. Dual-mode - will accept command line arguments, if none, will offer a GUI
-1. Two-Boost libraries included - json and tokenizer 
+1. Boost libraries included - curl, debug, json and tokenizer
 1. Installer
 
 # Dev notes
