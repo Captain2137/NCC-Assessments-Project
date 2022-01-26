@@ -29,9 +29,8 @@
 ### User Interface
 
 - Samantha Hughson
->>>>>>> ebb443cbe12b3902e8a7ac8c71274239f4bb8740
 - Jacob Briand
-- team member 3
+- Simeon Grosu
 
 ## Features
 
