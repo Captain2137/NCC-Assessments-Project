@@ -18,6 +18,7 @@
 - Samantha Hughson
 - Jacob Briand
 - Simeon Grosu
+- Jared Gonsalves
 
 ## Features
 
