@@ -5,7 +5,7 @@
 ### Task
 
 #### Computation
-- Mitchell Boone - home test
+- Mitchell Boone
 - team member 2
 - team member 3
 
