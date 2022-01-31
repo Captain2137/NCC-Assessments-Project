@@ -6,8 +6,8 @@
 
 #### Computation
 - Mitchell Boone
-- team member 2
-- team member 3
+- Michael Q
+- Lim Costello
 
 #### Visualization
 - Samuel Bean
