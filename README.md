@@ -26,6 +26,12 @@
 1. Boost libraries included - curl, debug, json and tokenizer
 1. Installer
 
+# VS2019 Installation to fix issues
+
+Make sure red outlined options are selected in VS2019 installation
+
+![include](doc/VS2019-installation-options.jpg "include")
+
 # Dev notes
 
 Clone solution into VS2019
