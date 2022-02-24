@@ -39,7 +39,7 @@ Add include path
 
 *If VS2019 can't find boost header files*
 
-![cpp include](res/cpp-include.png "CPP include")
+![cpp include](res/cpp-include.png "C++ include")
 
 ![include](res/include.png "include")
 
