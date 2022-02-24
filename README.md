@@ -2,7 +2,7 @@
 
 ## Team
 
-### Task
+### Tasks
 
 #### Computation
 - Mitchell Boone
@@ -12,7 +12,8 @@
 #### Visualization
 - Samuel Bean
 - Jesse Angelopolus
-
+- FILL_IN_MISSING_NAME
+- FILL_IN_MISSING_NAME
 
 #### User Interface
 - Samantha Hughson
@@ -26,29 +27,25 @@
 1. Boost libraries included - curl, debug, json and tokenizer
 1. Installer
 
-# VS2019 Installation to fix issues
+# VS2019 Installation
 
 Make sure red outlined options are selected in VS2019 installation
 
-![include](doc/VS2019-installation-options.jpg "include")
+![VS2019 Installation Options](res/VS2019-installation-options.jpg "VS2019 Installation Options")
 
-# Dev notes
+## Project Properties Fix
 
-Clone solution into VS2019
-
-# Project Properties
-
-- Add include path  
+Add include path  
 
 *If VS2019 can't find boost header files*
 
-![include](doc/cpp-include.png "include")
+![cpp include](res/cpp-include.png "C++ include")
 
-![include](doc/include.png "include")
+![include](res/include.png "include")
 
-- No precompiled headers  
+No precompiled headers  
 
-![no precompiled headers](doc/no-precompiled-headers.png "no precompiled headers")
+![no precompiled headers](res/no-precompiled-headers.png "no precompiled headers")
 
 ## To add boost libraries into the project (current version is 1.78.0)
 
