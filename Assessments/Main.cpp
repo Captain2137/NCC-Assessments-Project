@@ -82,8 +82,32 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
 
         getline(file, line);            // Get first line from file
         std::stringstream str(line);    // Get line ready for string segmentation
-        std::getline(str, text, ',');   // Get first substring from line till ','
+
+        std::getline(str, text, ',');       // Get first substring from line till ','
+        course.setYear(std::stoi(text));    // Save as the year
+
+        std::getline(str, text, ',');   // Get second substring from line till ','
+        course.setSemester(text);       // Save as the semester
+
+        std::getline(str, text, ',');   // Get third substring from line till ','
+        course.setCode(text);           // Save as the code
+
+        std::getline(str, text, ',');   // Get forth substring from line till ','
+        course.setName(text);           // Save as the course name
+
+        std::getline(str, text, ',');   // Get fith substring from line till ','
+        course.setSection(text);        // Save as the section
+
+        std::getline(str, text, ',');   // Get sixth substring from line till ','
         course.setProf(text);           // Save as the professors name
+
+        std::getline(str, text, ',');           // Get last substring from line till ','
+        course.setCourseNum(std::stoi(text));   // Save as the course number
+
+        getline(file, line);            // Get second line from file
+        str.clear();                    // Reset stringstream
+        str.str(line);                  // Get line ready for string segmentation
+        std::getline(str, text, ',');   // Get first substring from line till ','
 
         // Get the rest of the substrings in line and save them as competencies
         while (std::getline(str, text, ',')) {  // Keeps looping till end of list string
@@ -116,7 +140,17 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
             course.addAverage(std::stod(text));
         }
 
-        getline(file, line);            // Get last line from file
+        getline(file, line);            // Get third from last line from file
+        str.clear();                    // Reset stringstream
+        str.str(line);                  // Get line ready for string segmentation
+        std::getline(str, text, ',');   // Skip first substring from line till ','
+
+        // Get the rest of the substrings in line and save them as medians
+        while (std::getline(str, text, ',')) {  // Keeps looping till end of string
+            course.addMedian(std::stoi(text));
+        }
+
+        getline(file, line);            // Get second from last line from file
         str.clear();                    // Reset stringstream
         str.str(line);                  // Get line ready for string segmentation
         std::getline(str, text, ',');   // Skip first substring from line till ','
@@ -124,6 +158,16 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
         // Get the rest of the substrings in line and save them as percents
         while (std::getline(str, text, ',')) {  // Keeps looping till end of string
             course.addPercent(std::stod(text));
+        }
+
+        getline(file, line);            // Get last line from file
+        str.clear();                    // Reset stringstream
+        str.str(line);                  // Get line ready for string segmentation
+        std::getline(str, text, ',');   // Skip first substring from line till ','
+
+        // Get the rest of the substrings in line and save them as deviations
+        while (std::getline(str, text, ',')) {  // Keeps looping till end of string
+            course.addDeviation(std::stod(text));
         }
 
         // Close file when done
@@ -173,7 +217,13 @@ void debugPrint(const std::vector<int> courseNums, const std::string auth) {
 void printCourseData(std::vector<CourseData>* courses) {
     std::cout << "Debug: CourseData\n";
     for (int i = 0; i < (int)courses->size(); i++) {
-        std::cout << "Course: " << courses->at(i).getCourseNum() << std::endl;
+        std::cout << courses->at(i).getYear() << " ";
+        std::cout << courses->at(i).getSemester() << " ";
+        std::cout << courses->at(i).getCode() << " ";
+        std::cout << courses->at(i).getName() << " ";
+        std::cout << courses->at(i).getSection() << " ";
+        std::cout << courses->at(i).getProf() << " ";
+        std::cout << courses->at(i).getCourseNum() << std::endl;
 
         // Print comps contents to console
         for (int j = 0; j < (int)courses->at(i).getComps()->size(); j++) {
@@ -195,9 +245,21 @@ void printCourseData(std::vector<CourseData>* courses) {
         }
         std::cout << std::endl;
 
+        // Print median contents to console
+        for (int j = 0; j < (int)courses->at(i).getMedian()->size(); j++) {
+            std::cout << courses->at(i).getMedian()->at(j) << " ";
+        }
+        std::cout << std::endl;
+
         // Print percent contents to console
         for (int j = 0; j < (int)courses->at(i).getPercent()->size(); j++) {
             std::cout << courses->at(i).getPercent()->at(j) << " ";
+        }
+        std::cout << std::endl;
+
+        // Print deviation contents to console
+        for (int j = 0; j < (int)courses->at(i).getDeviation()->size(); j++) {
+            std::cout << courses->at(i).getDeviation()->at(j) << " ";
         }
         std::cout << std::endl << std::endl;
     }

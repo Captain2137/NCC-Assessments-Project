@@ -41,7 +41,7 @@ namespace Assessments {
 			}
 		}
 
-		// Its here due to a auto code generation problem, move
+		// Its here due to an auto code generation problem, move
 		String^ auth = "";	// Contains authorisation key
 
 		// Auto generated code

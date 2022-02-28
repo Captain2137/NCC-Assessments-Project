@@ -6,7 +6,7 @@ System::Void Assessments::UIForm::enterBtn_Click(System::Object^ sender, System:
 	auth = authKey->Text;
 
 	// Temporarily add temp test course number
-	courses->push_back(63925);
+	courses->push_back(99999);
 
 	// Close form
 	this->Close();

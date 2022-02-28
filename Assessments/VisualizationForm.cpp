@@ -7,7 +7,12 @@ Assessments::VisualizationForm::VisualizationForm(std::vector<CourseData>* in) {
 	// Go through courses vector and add data to textBox1 for each course
 	for (int i = 0; i < 1; i++) {	// Replace 1 with (int)in->size() when course data works
 
-		// Add professors name and Competencies label
+		// Add course info and Competencies label
+		textBox1->Text += in->at(i).getYear() + " ";
+		textBox1->Text += msclr::interop::marshal_as<String^>(in->at(i).getSemester() + " ");
+		textBox1->Text += msclr::interop::marshal_as<String^>(in->at(i).getCode() + " ");
+		textBox1->Text += msclr::interop::marshal_as<String^>(in->at(i).getName() + " ");
+		textBox1->Text += msclr::interop::marshal_as<String^>(in->at(i).getSection() + " ");
 		textBox1->Text += msclr::interop::marshal_as<String^>(in->at(i).getProf() + " ");
 		textBox1->Text += in->at(i).getCourseNum() + ":\r\nCompetencies: ";
 
@@ -34,11 +39,27 @@ Assessments::VisualizationForm::VisualizationForm(std::vector<CourseData>* in) {
 		}
 		textBox1->Text += "\r\n";	// Next line
 
+		textBox1->Text += "Median: "; // Add median label
+
+		// Loops through median vector adding each to text box
+		for (int j = 0; j < (int)in->at(i).getMedian()->size(); j++) {
+			textBox1->Text += in->at(i).getMedian()->at(j) + " ";
+		}
+		textBox1->Text += "\r\n";	// Next line
+
 		textBox1->Text += "Percent: ";	// Add percent label
 
 		// Loops through percent vector adding each to text box
 		for (int j = 0; j < (int)in->at(i).getPercent()->size(); j++) {
 			textBox1->Text += in->at(i).getPercent()->at(j) + "% ";
+		}
+		textBox1->Text += "\r\n";	// Next line
+
+		textBox1->Text += "Deviation: "; // Add deviation label
+
+		// Loops through deviation vector adding each to text box
+		for (int j = 0; j < (int)in->at(i).getDeviation()->size(); j++) {
+			textBox1->Text += in->at(i).getDeviation()->at(j) + " ";
 		}
 		textBox1->Text += "\r\n";	// Next line
 	}
