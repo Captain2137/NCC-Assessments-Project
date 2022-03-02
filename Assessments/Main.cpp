@@ -3,6 +3,16 @@
 //
 // Convert String^ to String thanks to:
 // https://stackoverflow.com/questions/946813/c-cli-converting-from-systemstring-to-stdstring
+//
+// Additional libraries added thanks to:
+// https://docs.microsoft.com/en-us/cpp/build/adding-references-in-visual-cpp-projects?view=msvc-170
+// https://vcpkg.io/en/getting-started.html
+// 
+// Curl thanks to: (Windows 64 bit binary)
+// https://curl.se/download.html
+//
+// JSON thanks to:
+// https://github.com/open-source-parsers/jsoncpp
 */
 
 #include "UIForm.h"
@@ -15,7 +25,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>  // Needed for stringstream
-//#include <curl/curl.h>  // Needed for pulling data from online servers
+#include <curl/curl.h>  // Needed for pulling data from online servers
+#include <json/json.h>
 
 // Needed for Windows Form
 using namespace System;
@@ -25,6 +36,7 @@ void debugPrint(const std::vector<int> courseNums, const std::string auth); // D
 int readCSV(std::vector<CourseData>* courses, std::string fileName);    // Read in data from CSV file
 void printCourseData(std::vector<CourseData>* courses); // Debug test to print course data to console
 void testCurl(std::string auth);    // Test to see if curl works
+void testJSON();    // Test to see if JSON works
 
 [STAThread]
 
@@ -32,6 +44,9 @@ int main(int argc, char* argv[]) {
     if (argc <= 1) {
         std::vector<int> courseNums;        // Vector array holding course numbers
         std::vector<CourseData> courses;    // Vector array holding course data for each course
+
+        testCurl("");
+        testJSON();
 
         // Read in test CSV
         if (readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv") == EXIT_FAILURE) {
@@ -266,10 +281,41 @@ void printCourseData(std::vector<CourseData>* courses) {
 }
 
 // Test to see if curl works
+static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
+    ((std::string*)userp)->append((char*)contents, size * nmemb);
+    return size * nmemb;
+}
+
+// Test to see if curl works
 void testCurl(std::string auth) {
     std::string url = "https://https://canvas-prod.ccsnh.edu/api/v1/courses?access_token=" + auth;
 
-    //CURL* curl;
-    //curl = curl_easy_init();
-    //curl_easy_cleanup(curl);
+    CURL* curl;
+    CURLcode res;
+    std::string readBuffer;
+
+    curl = curl_easy_init();
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, "http://www.google.com");
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+        res = curl_easy_perform(curl);
+        curl_easy_cleanup(curl);
+
+        std::cout << readBuffer << std::endl;
+    }
+}
+
+void testJSON() {
+    Json::Value root;
+    std::ifstream ifs("withComment.json");
+
+    Json::CharReaderBuilder builder;
+    builder["collectComments"] = true;
+    JSONCPP_STRING errs;
+    if (!parseFromStream(builder, ifs, &root, &errs)) {
+        std::cout << errs << std::endl;
+        return;
+    }
+    std::cout << root << std::endl;
 }
