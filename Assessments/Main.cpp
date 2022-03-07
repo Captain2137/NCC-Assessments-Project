@@ -311,7 +311,7 @@ void testJSON() {
     std::ifstream ifs("withComment.json");
 
     Json::CharReaderBuilder builder;
-    builder["collectComments"] = true;
+    builder["collectComments"] = false;
     JSONCPP_STRING errs;
     if (!parseFromStream(builder, ifs, &root, &errs)) {
         std::cout << errs << std::endl;
