@@ -19,24 +19,25 @@
 #include "VisualizationForm.h"
 #include "CommandLine.h"
 #include "CourseData.h"
+#include "Curl.h"
 #include <msclr/marshal_cppstd.h>   // Needed to convert String^ to String
 #include <string>
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <sstream>  // Needed for stringstream
-#include <curl/curl.h>  // Needed for pulling data from online servers
-#include <json/json.h>
+#include <sstream>      // Needed for stringstream
+#include <json/json.h>  // Needed to read data fetched from online servers
 
 // Needed for Windows Form
 using namespace System;
 using namespace System::Windows::Forms;
 
+using namespace Curl;
+
 void debugPrint(const std::vector<int> courseNums, const std::string auth); // Debug test to print data to console
 int readCSV(std::vector<CourseData>* courses, std::string fileName);    // Read in data from CSV file
 void printCourseData(std::vector<CourseData>* courses); // Debug test to print course data to console
-void testCurl(std::string auth);    // Test to see if curl works
-void testJSON();    // Test to see if JSON works
+void listCourses(std::string rawJson);      // List courses from json given by online server
 
 [STAThread]
 
@@ -45,24 +46,20 @@ int main(int argc, char* argv[]) {
         std::vector<int> courseNums;        // Vector array holding course numbers
         std::vector<CourseData> courses;    // Vector array holding course data for each course
 
-        testCurl("");
-        testJSON();
-
         // Read in test CSV
-        if (readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv") == EXIT_FAILURE) {
+        if (readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv") == EXIT_FAILURE)
             return EXIT_FAILURE;
-        }
 
         // Set Windows Form Styles
         Application::EnableVisualStyles();
         Application::SetCompatibleTextRenderingDefault(false);
 
-        // Define UI form sending course vector address
+        // Define UI form and send course vector address
         Assessments::UIForm ui(&courseNums);
         Application::Run(% ui); // Run UI form
 
         // Get authorization key from ui and convert it from String^ to String
-        std::string auth = msclr::interop::marshal_as< std::string >(ui.getAuth());
+        std::string auth = msclr::interop::marshal_as<std::string>(ui.getAuth());
 
         // Go through courses vector and create CourseData class for each
         for (int i = 0; i < (int)courseNums.size(); i++) {
@@ -192,26 +189,26 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
         courses->push_back(course);
     } catch (const std::ios_base::failure& e) {
         // If error happends while opeing file
-        std::cout << "Error: " << e.what() << ", reading of file failed\n";
+        std::cout << "Error: " << e.what() << ", reading of file failed\n\n";
         return EXIT_FAILURE;
     } catch (const std::invalid_argument& e) {
         // If error happends while reading file
-        std::cout << "Error: " << e.what() << ", file not compatible\n";
+        std::cout << "Error: " << e.what() << ", file not compatible\n\n";
         return EXIT_FAILURE;
     } catch (const std::exception& e) {
         // If another error happends
-        std::cout << "Error: " << e.what() << std::endl;
+        std::cout << "Error: " << e.what() << std::endl << std::endl;
         return EXIT_FAILURE;
     } catch (...) {
         // If error unknown happends
-        std::cout << "Error: Unknown\n";
+        std::cout << "Error: Unknown\n\n";
         return EXIT_FAILURE;
     }
 
     //Debug: Prints course data to comsole
     printCourseData(courses);
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 // Debug test to print course numbers and authorization key to console
@@ -280,42 +277,26 @@ void printCourseData(std::vector<CourseData>* courses) {
     }
 }
 
-// Test to see if curl works
-static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
-    ((std::string*)userp)->append((char*)contents, size * nmemb);
-    return size * nmemb;
-}
-
-// Test to see if curl works
-void testCurl(std::string auth) {
-    std::string url = "https://https://canvas-prod.ccsnh.edu/api/v1/courses?access_token=" + auth;
-
-    CURL* curl;
-    CURLcode res;
-    std::string readBuffer;
-
-    curl = curl_easy_init();
-    if (curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, "http://www.google.com");
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-        res = curl_easy_perform(curl);
-        curl_easy_cleanup(curl);
-
-        std::cout << readBuffer << std::endl;
-    }
-}
-
-void testJSON() {
+// List courses from json given by online server
+void listCourses(std::string rawJson) {
+    JSONCPP_STRING errs;
     Json::Value root;
-    std::ifstream ifs("withComment.json");
 
     Json::CharReaderBuilder builder;
-    builder["collectComments"] = false;
-    JSONCPP_STRING errs;
-    if (!parseFromStream(builder, ifs, &root, &errs)) {
+    std::unique_ptr<Json::CharReader> const reader(builder.newCharReader());
+    if (!reader->parse(rawJson.c_str(), rawJson.c_str() + rawJson.length(), &root, &errs)) {
         std::cout << errs << std::endl;
         return;
     }
-    std::cout << root << std::endl;
+
+    try {
+        std::cout << "Errors: " << root.isMember("errors");
+        std::cout << "Your courses: ";
+        for (int i = 0; i < root.size(); i++) {
+            std::cout << root[i]["id"].asInt() << ", ";
+        }
+        std::cout << std::endl << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "Error: " << e.what() << std::endl << std::endl;
+    }
 }

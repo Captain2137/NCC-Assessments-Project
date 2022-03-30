@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CommandLine.cpp" />
+    <ClCompile Include="Curl.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="UIForm.cpp" />
     <ClCompile Include="VisualizationForm.cpp" />
@@ -123,6 +124,7 @@
   <ItemGroup>
     <ClInclude Include="CommandLine.h" />
     <ClInclude Include="CourseData.h" />
+    <ClInclude Include="Curl.h" />
     <ClInclude Include="UIForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>

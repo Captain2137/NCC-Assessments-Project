@@ -28,7 +28,6 @@ namespace Assessments {
 		}
 
 		String^ getAuth() { return auth; }	// Return authorisation key
-
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
