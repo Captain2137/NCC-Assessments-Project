@@ -19,8 +19,6 @@ public:
     std::vector<double> percent;        // Percent passed in each competency
     std::vector<double> deviation;      // Deviation in each competency
 
-    CourseData() {};    // Default constructor
-
     void setCourseNum(int courseNumIn) { courseNum = courseNumIn; }             // Sets course number
     void setYear(int yearIn) { year = yearIn; }                                 // Sets year
     void setSemester(std::string semesterIn) { semester = semesterIn; }         // Sets semester
@@ -34,6 +32,8 @@ public:
     void addMedian(int medianIn) { median.push_back(medianIn); }                // Adds a median
     void addPercent(double percentIn) { percent.push_back(percentIn); }         // Adds a percent
     void addDeviation(double deviationIn) { deviation.push_back(deviationIn); } // Adds a deviation
+
+    void calculate();   // Calculate average, median, percent, and deviation from data
 
     int getCourseNum() { return courseNum; }                    // Returns course number
     int getYear() { return year; }                              // Returns year

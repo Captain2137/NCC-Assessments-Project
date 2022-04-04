@@ -94,6 +94,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>libcurl.dll.a;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -116,6 +117,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CommandLine.cpp" />
+    <ClCompile Include="CourseData.cpp" />
     <ClCompile Include="Curl.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="UIForm.cpp" />

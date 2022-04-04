@@ -10,37 +10,25 @@ namespace Assessments {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for UIForm
-	/// </summary>
 	public ref class UIForm : public System::Windows::Forms::Form {
 	public:
 		std::vector<int>* courses;	// Pointer to given vector to store course numbers
 
-		// Constructor
-		UIForm(std::vector<int>* in) {
+		UIForm(std::vector<int>* in) {	// Constructor
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 
 			courses = in;	// Set courses pointer to given address
 		}
 
 		String^ getAuth() { return auth; }	// Return authorisation key
+
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		~UIForm()
-		{
+		~UIForm() {	// Deconstructor
 			if (components)
-			{
 				delete components;
-			}
 		}
 
-		// Its here due to an auto code generation problem, move
+		// Its here due to an auto code generation problem, move after finished
 		String^ auth = "";	// Contains authorisation key
 
 		// Auto generated code
@@ -48,9 +36,7 @@ namespace Assessments {
 	private: System::Windows::Forms::TextBox^ authKey;
 
 	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
+		// Required designer variable.
 		System::ComponentModel::Container ^components;
 
 		// DO NOT MODIFY

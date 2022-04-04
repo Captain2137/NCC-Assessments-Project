@@ -5,14 +5,13 @@
 #include <msclr/marshal_cppstd.h>   // Needed to convert String^ to String
 #include <json/json.h>  // Needed to read data fetched from online servers
 
-using namespace Curl;
+using namespace curl;
 
 // On enter button click, get authorization key from authKey, and exit form
 System::Void Assessments::UIForm::enterBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-	// Set auth as what user put in textBox1
-	auth = authKey->Text;
+	auth = authKey->Text;   // Set auth as what user put in textBox1
 
-	std::string rawJson = Curl::request("https://canvas-prod.ccsnh.edu/api/v1/courses?per_page=100&access_token=" + msclr::interop::marshal_as<std::string>(authKey->Text));
+	std::string rawJson = curl::request("https://canvas-prod.ccsnh.edu/api/v1/courses?per_page=100&access_token=" + msclr::interop::marshal_as<std::string>(authKey->Text));
 
     JSONCPP_STRING errs;
     Json::Value root;
