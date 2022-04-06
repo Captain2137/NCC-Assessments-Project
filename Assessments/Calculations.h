@@ -5,11 +5,8 @@
 #include "CourseData.h"
 
 // Class for computating the calculations of the data
-class Calculations
+namespace calculations
 {
-public:
-	Calculations() {}; // Default constructor
-
 	double calcAvg(std::vector<double>&);								// Calculates the average of a vector of doubles
 	double calcMedian(std::vector<double>&);							// Calculates the median of a vector of doubles
 	double calcPercentThree(std::vector<double>&);						// Calculates the percent above three of a vector of doubles

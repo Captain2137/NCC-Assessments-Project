@@ -7,8 +7,10 @@
 
 #include "Calculations.h"
 
+using namespace calculations;
+
 // Calculates the average given a vector of doubles
-double Calculations::calcAvg(std::vector<double>& scores)
+double calculations::calcAvg(std::vector<double>& scores)
 {
 	// The average score
 	double avgScore = 0;
@@ -30,7 +32,7 @@ double Calculations::calcAvg(std::vector<double>& scores)
 }
 
 // Calculates the median given a vector of doubles
-double Calculations::calcMedian(std::vector<double>& scores) {
+double calculations::calcMedian(std::vector<double>& scores) {
 	// The median score
 	double median = 0;
 	// The number of scores in the vector
@@ -57,7 +59,7 @@ double Calculations::calcMedian(std::vector<double>& scores) {
 
 // Calculates the number of scores tha are 3 or higher
 // given a vector of doubles
-double Calculations::calcPercentThree(std::vector<double>& scores) {
+double calculations::calcPercentThree(std::vector<double>& scores) {
 	// The percent of scores above 3
 	double percentThree = 0;
 	// The number of scores in the vector
@@ -83,15 +85,14 @@ double Calculations::calcPercentThree(std::vector<double>& scores) {
 
 // Calculates the standard deviation given a vector
 // of doubles
-double Calculations::calcDeviation(std::vector<double>& scores) {
+double calculations::calcDeviation(std::vector<double>& scores) {
 	// The standard deviation of the scores
 	double deviation = 0;
 	// The number of scores in the vector
 	int size = scores.size();
 	// Use the calcAvg function to get the average
 	// of the scores
-	Calculations c;
-	double average = c.calcAvg(scores);
+	double average = calcAvg(scores);
 	// The sum of the squares of each deviation
 	double sum = 0;
 
@@ -111,7 +112,7 @@ double Calculations::calcDeviation(std::vector<double>& scores) {
 /*
 // Calculates the average in each competency 
 // given a vector of CourseData
-std::vector<double> Calculations::calcAvg(std::vector<CourseData>& courses)
+std::vector<double> calculations::calcAvg(std::vector<CourseData>& courses)
 {
 	// The averages
 	std::vector<double> averages = {};
@@ -194,7 +195,7 @@ std::vector<double> Calculations::calcAvg(std::vector<CourseData>& courses) {
 
 // Calculates the median in each competency 
 // given a vector of CourseData
-std::vector<double> Calculations::calcMedian(std::vector<CourseData>& courses) {
+std::vector<double> calculations::calcMedian(std::vector<CourseData>& courses) {
 	// The medians
 	std::vector<double> medians = {};
 	// The number of courses in the vector
@@ -234,7 +235,7 @@ std::vector<double> Calculations::calcMedian(std::vector<CourseData>& courses) {
 
 // Calculates the percent above three in each competency 
 // given a vector of CourseData
-std::vector<double> Calculations::calcPercentThree(std::vector<CourseData>& courses) {
+std::vector<double> calculations::calcPercentThree(std::vector<CourseData>& courses) {
 	// The percent of scores above 3
 	std::vector<double> percentThrees = {};
 	// The number of courses in the vector
@@ -275,7 +276,7 @@ std::vector<double> Calculations::calcPercentThree(std::vector<CourseData>& cour
 
 // Calculates the standard deviations in each competency 
 // given a vector of CourseData
-std::vector<double> Calculations::calcDeviation(std::vector<CourseData>& courses) {
+std::vector<double> calculations::calcDeviation(std::vector<CourseData>& courses) {
 	// The standard deviations of the scores
 	std::vector<double> deviations = {};
 	// The number of courses in the vector
@@ -317,7 +318,7 @@ std::vector<double> Calculations::calcDeviation(std::vector<CourseData>& courses
 
 // Calculates the averages, medians, percents above three, and 
 // standard devations in each competency given a vector of CourseData
-void Calculations::calcData(std::vector<CourseData>& courses, 
+void calculations::calcData(std::vector<CourseData>& courses, 
 	std::vector<double>* averages, std::vector<double>* medians, 
 	std::vector<double>* percentThrees, std::vector<double>* deviations) {
 	// The number of courses in the vector
@@ -365,7 +366,7 @@ void Calculations::calcData(std::vector<CourseData>& courses,
 
 // Calculates the averages, medians, percents above three, and 
 // standard devations in each competency given a CourseData object
-void Calculations::calcData(CourseData course, 
+void calculations::calcData(CourseData course, 
 	std::vector<double>* averages, std::vector<double>* medians,
 	std::vector<double>* percentThrees, std::vector<double>* deviations) {
 	// The number of competencies in the courses
