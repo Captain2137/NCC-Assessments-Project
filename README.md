@@ -12,12 +12,12 @@
 #### Visualization
 - Samuel Bean
 - Jesse Angelopolus
-- FILL_IN_MISSING_NAME
-- FILL_IN_MISSING_NAME
+- Anthony Basque
+- Nathan Jabbour
 
 #### User Interface
-- Samantha Hughson 2
-- Jacob Briand
+- Samantha Hughson1
+- Jacob Briand3
 - Simeon Grosu
 - Jared Gonsalves
 

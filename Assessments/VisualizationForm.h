@@ -12,33 +12,22 @@ namespace Assessments {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for VisualizationForm
-	/// </summary>
 	public ref class VisualizationForm : public System::Windows::Forms::Form {
 	public:
 		// Constructor takes in vector of CourseData
 		VisualizationForm(std::vector<CourseData>* in);
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		~VisualizationForm() {
+		~VisualizationForm() {	// Deconstructor
 			if (components)
-			{
 				delete components;
-			}
 		}
 
 		// Auto generated code
 	private: System::Windows::Forms::TextBox^ textBox1;
 
 	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container ^components;	// Required designer variable.
 
 		// DO NOT MODIFY
 #pragma region Windows Form Designer generated code

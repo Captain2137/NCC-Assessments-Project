@@ -12,7 +12,7 @@
 // https://curl.se/download.html
 //
 // JSON thanks to:
-// https://github.com/open-source-parsers/jsoncpp
+// https://github.com/nlohmann/json
 */
 
 #include "UIForm.h"
@@ -26,18 +26,18 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>      // Needed for stringstream
-#include <json/json.h>  // Needed to read data fetched from online servers
+#include <nlohmann/json.hpp>    // Needed to read data fetched from online servers
+
+using json = nlohmann::json;
 
 // Needed for Windows Form
 using namespace System;
 using namespace System::Windows::Forms;
 
-using namespace Curl;
+using namespace curl;
 
-void debugPrint(const std::vector<int> courseNums, const std::string auth); // Debug test to print data to console
+void debugPrint(const std::vector<int> courseNums, const std::string auth, std::vector<CourseData>* courses); // Debug test to print data to console
 int readCSV(std::vector<CourseData>* courses, std::string fileName);    // Read in data from CSV file
-void printCourseData(std::vector<CourseData>* courses); // Debug test to print course data to console
-void listCourses(std::string rawJson);      // List courses from json given by online server
 
 [STAThread]
 
@@ -45,33 +45,36 @@ int main(int argc, char* argv[]) {
     if (argc <= 1) {
         std::vector<int> courseNums;        // Vector array holding course numbers
         std::vector<CourseData> courses;    // Vector array holding course data for each course
+        std::string auth;                   // String holding authorization key
 
         // Read in test CSV
         if (readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv") == EXIT_FAILURE)
             return EXIT_FAILURE;
 
+        // Debug: Prints auth and course numbers to console with course data
+        debugPrint(courseNums, auth, &courses);
+
         // Set Windows Form Styles
         Application::EnableVisualStyles();
         Application::SetCompatibleTextRenderingDefault(false);
 
-        // Define UI form and send course vector address
+        // Define UI form and send course numbers vector address
         Assessments::UIForm ui(&courseNums);
         Application::Run(% ui); // Run UI form
 
         // Get authorization key from ui and convert it from String^ to String
-        std::string auth = msclr::interop::marshal_as<std::string>(ui.getAuth());
+        auth = msclr::interop::marshal_as<std::string>(ui.getAuth());
 
         // Go through courses vector and create CourseData class for each
-        for (int i = 0; i < (int)courseNums.size(); i++) {
-            courses.push_back(CourseData());
-            courses.back().setCourseNum(courseNums[i]);
-        }
+        //for (int i = 0; i < (int)courseNums.size(); i++) {
+        //    courses.push_back(CourseData());
+        //    courses.back().setCourseNum(courseNums[i]);
+        //}
 
         // Debug: Prints auth and course numbers to console with course data
-        debugPrint(courseNums, auth);
-        printCourseData(&courses);
+        debugPrint(courseNums, auth, &courses);
 
-        // Define Visualization form sending course vector address
+        // Define Visualization form sending course data vector address
         Assessments::VisualizationForm visualization(&courses);
         Application::Run(% visualization);  // Run Visualization form
     } else {
@@ -121,6 +124,9 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
         str.str(line);                  // Get line ready for string segmentation
         std::getline(str, text, ',');   // Get first substring from line till ','
 
+        if (text != "Students") // If first substring is not "Students"
+            throw std::invalid_argument("invalid argument encountered");    // Throw invalid_argument error
+
         // Get the rest of the substrings in line and save them as competencies
         while (std::getline(str, text, ',')) {  // Keeps looping till end of list string
             course.addComps(text);
@@ -147,6 +153,9 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
             std::getline(str, text, ',');   // Get first substring from line till ','
         }
 
+        if (text != "Average")  // If first substring is not "Average"
+            throw std::invalid_argument("invalid argument encountered");    // Throw invalid_argument error
+
         // Get the rest of the substrings in line and save them as averages
         while (std::getline(str, text, ',')) {  // Keeps looping till end of string
             course.addAverage(std::stod(text));
@@ -156,6 +165,9 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
         str.clear();                    // Reset stringstream
         str.str(line);                  // Get line ready for string segmentation
         std::getline(str, text, ',');   // Skip first substring from line till ','
+
+        if (text != "Median")   // If first substring is not "Median"
+            throw std::invalid_argument("invalid argument encountered");    // Throw invalid_argument error
 
         // Get the rest of the substrings in line and save them as medians
         while (std::getline(str, text, ',')) {  // Keeps looping till end of string
@@ -167,6 +179,9 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
         str.str(line);                  // Get line ready for string segmentation
         std::getline(str, text, ',');   // Skip first substring from line till ','
 
+        if (text != "Percent")  // If first substring is not "Percent"
+            throw std::invalid_argument("invalid argument encountered");    // Throw invalid_argument error
+
         // Get the rest of the substrings in line and save them as percents
         while (std::getline(str, text, ',')) {  // Keeps looping till end of string
             course.addPercent(std::stod(text));
@@ -176,6 +191,9 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
         str.clear();                    // Reset stringstream
         str.str(line);                  // Get line ready for string segmentation
         std::getline(str, text, ',');   // Skip first substring from line till ','
+
+        if (text != "Deviation")    // If first substring is not "Deviation"
+            throw std::invalid_argument("invalid argument encountered");    // Throw invalid_argument error
 
         // Get the rest of the substrings in line and save them as deviations
         while (std::getline(str, text, ',')) {  // Keeps looping till end of string
@@ -189,11 +207,11 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
         courses->push_back(course);
     } catch (const std::ios_base::failure& e) {
         // If error happends while opeing file
-        std::cout << "Error: " << e.what() << ", reading of file failed\n\n";
+        std::cout << "Error: " << e.what() << ", reading of file \"" << fileName << "\" failed\n\n";
         return EXIT_FAILURE;
     } catch (const std::invalid_argument& e) {
         // If error happends while reading file
-        std::cout << "Error: " << e.what() << ", file not compatible\n\n";
+        std::cout << "Error: " << e.what() << ", file \"" << fileName << "\" not compatible\n\n";
         return EXIT_FAILURE;
     } catch (const std::exception& e) {
         // If another error happends
@@ -205,98 +223,71 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
         return EXIT_FAILURE;
     }
 
-    //Debug: Prints course data to comsole
-    printCourseData(courses);
-
     return EXIT_SUCCESS;
 }
 
-// Debug test to print course numbers and authorization key to console
-void debugPrint(const std::vector<int> courseNums, const std::string auth) {
+// Debug test to print course numbers, authorization key, and course data to console
+void debugPrint(const std::vector<int> courseNums, const std::string auth, std::vector<CourseData>* courses) {
     // Prints auth and course numbers to console
-    std::cout << "Debug: Courses\n";
+    std::cout << "Debug: CourseData\n";
     std::cout << "Auth key: " << auth << std::endl;
     std::cout << "Courses: ";
 
-    // Go through courses vector and print contents to console
+    // Go through course numbers vector and print contents to console
     for (unsigned int i = 0; i < courseNums.size(); i++) {
         std::cout << courseNums[i] << ", ";
     }
     std::cout << std::endl << std::endl;
-}
 
-// Debug test to print course data to console
-void printCourseData(std::vector<CourseData>* courses) {
-    std::cout << "Debug: CourseData\n";
+    // Go through course data vector and print contents to console
     for (int i = 0; i < (int)courses->size(); i++) {
-        std::cout << courses->at(i).getYear() << " ";
-        std::cout << courses->at(i).getSemester() << " ";
-        std::cout << courses->at(i).getCode() << " ";
-        std::cout << courses->at(i).getName() << " ";
-        std::cout << courses->at(i).getSection() << " ";
-        std::cout << courses->at(i).getProf() << " ";
+        std::cout << courses->at(i).getYear() << ",";
+        std::cout << courses->at(i).getSemester() << ",";
+        std::cout << courses->at(i).getCode() << ",";
+        std::cout << courses->at(i).getName() << ",";
+        std::cout << courses->at(i).getSection() << ",";
+        std::cout << courses->at(i).getProf() << ",";
         std::cout << courses->at(i).getCourseNum() << std::endl;
 
         // Print comps contents to console
+        std::cout << "Students,";
         for (int j = 0; j < (int)courses->at(i).getComps()->size(); j++) {
-            std::cout << courses->at(i).getComps()->at(j) << ", ";
+            std::cout << courses->at(i).getComps()->at(j) << ",";
         }
         std::cout << std::endl;
 
         // Print data contents to console
         for (int j = 0; j < (int)courses->at(i).getData()->size(); j++) {
+            std::cout << "Student " << j + 1 << ",";
             for (int k = 0; k < (int)courses->at(i).getData()->at(j).size(); k++) {
-                std::cout << courses->at(i).getData()->at(j).at(k) << " ";
+                std::cout << courses->at(i).getData()->at(j).at(k) << ",";
             }
             std::cout << std::endl;
         }
 
         // Print average contents to console
+        std::cout << "Average,";
         for (int j = 0; j < (int)courses->at(i).getAverage()->size(); j++) {
-            std::cout << courses->at(i).getAverage()->at(j) << " ";
+            std::cout << courses->at(i).getAverage()->at(j) << ",";
         }
-        std::cout << std::endl;
 
         // Print median contents to console
+        std::cout << "\nMedian,";
         for (int j = 0; j < (int)courses->at(i).getMedian()->size(); j++) {
-            std::cout << courses->at(i).getMedian()->at(j) << " ";
+            std::cout << courses->at(i).getMedian()->at(j) << ",";
         }
-        std::cout << std::endl;
 
         // Print percent contents to console
+        std::cout << "\nPercent,";
         for (int j = 0; j < (int)courses->at(i).getPercent()->size(); j++) {
-            std::cout << courses->at(i).getPercent()->at(j) << " ";
+            std::cout << courses->at(i).getPercent()->at(j) << ",";
         }
-        std::cout << std::endl;
 
         // Print deviation contents to console
+        std::cout << "\nDeviation,";
         for (int j = 0; j < (int)courses->at(i).getDeviation()->size(); j++) {
-            std::cout << courses->at(i).getDeviation()->at(j) << " ";
+            std::cout << courses->at(i).getDeviation()->at(j) << ",";
         }
         std::cout << std::endl << std::endl;
-    }
-}
-
-// List courses from json given by online server
-void listCourses(std::string rawJson) {
-    JSONCPP_STRING errs;
-    Json::Value root;
-
-    Json::CharReaderBuilder builder;
-    std::unique_ptr<Json::CharReader> const reader(builder.newCharReader());
-    if (!reader->parse(rawJson.c_str(), rawJson.c_str() + rawJson.length(), &root, &errs)) {
-        std::cout << errs << std::endl;
-        return;
-    }
-
-    try {
-        std::cout << "Errors: " << root.isMember("errors");
-        std::cout << "Your courses: ";
-        for (int i = 0; i < root.size(); i++) {
-            std::cout << root[i]["id"].asInt() << ", ";
-        }
-        std::cout << std::endl << std::endl;
-    } catch (const std::exception& e) {
-        std::cout << "Error: " << e.what() << std::endl << std::endl;
     }
 }

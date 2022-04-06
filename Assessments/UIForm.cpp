@@ -3,38 +3,29 @@
 #include <string>
 #include <iostream>
 #include <msclr/marshal_cppstd.h>   // Needed to convert String^ to String
-#include <json/json.h>  // Needed to read data fetched from online servers
+#include <nlohmann/json.hpp>    // Needed to read data fetched from online servers
 
-using namespace Curl;
+using namespace curl;
+using json = nlohmann::json;
 
 // On enter button click, get authorization key from authKey, and exit form
 System::Void Assessments::UIForm::enterBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-	// Set auth as what user put in textBox1
-	auth = authKey->Text;
+	auth = authKey->Text;   // Set auth as what user put in textBox1
 
-	std::string rawJson = Curl::request("https://canvas.nashuaweb.net/api/v1/courses/1/outcome_results?per_page=100&access_token=" + msclr::interop::marshal_as<std::string>(authKey->Text));
+	// Get data from online server
+	json j = json::parse(curl::request("https://canvas-prod.ccsnh.edu/api/v1/courses?per_page=100&access_token=" + msclr::interop::marshal_as<std::string>(authKey->Text)));
 
-    JSONCPP_STRING errs;
-    Json::Value root;
+	// Debug: Print ran json with formating
+	std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;
 
-    Json::CharReaderBuilder builder;
-    std::unique_ptr<Json::CharReader> const reader(builder.newCharReader());
-    if (!reader->parse(rawJson.c_str(), rawJson.c_str() + rawJson.length(), &root, &errs)) {
-        std::cout << errs << std::endl;
-        return;
-    }
-
-    try {
-        //Json::Value id = root["id"];
-        //std::cout << id;
-
-
-        for (int i = 0; i < root.size(); i++) {
-            courses->push_back(root[i]["id"].asInt());
-        }
-    } catch (const std::exception& e) {
-        std::cout << e.what() << std::endl << std::endl;
-    }
+	if (j.contains("errors")) {	// If error, print error message(s)
+		std::cout << "Error: " << j["errors"][0]["message"].get<std::string>() << ", " << j["status"].get<std::string>() << std::endl << std::endl;
+	} else {	// If success, get course ids
+		// Step through the received data and add each course id to courses
+		for (int i = 0; i < j.size(); i++) {
+			courses->push_back(j[i]["id"]);
+		}
+	}
 
 	// Close form
 	this->Close();

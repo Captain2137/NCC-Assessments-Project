@@ -93,7 +93,8 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libcurl.dll.a;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcurl.dll.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -115,13 +116,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Calculations.cpp" />
     <ClCompile Include="CommandLine.cpp" />
+    <ClCompile Include="CourseData.cpp" />
     <ClCompile Include="Curl.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="UIForm.cpp" />
     <ClCompile Include="VisualizationForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Calculations.h" />
     <ClInclude Include="CommandLine.h" />
     <ClInclude Include="CourseData.h" />
     <ClInclude Include="Curl.h" />
