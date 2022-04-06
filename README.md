@@ -12,8 +12,6 @@
 #### Visualization
 - Samuel Bean
 - Jesse Angelopolus
-- FILL_IN_MISSING_NAME
-- FILL_IN_MISSING_NAME
 
 #### User Interface
 - Samantha Hughson
