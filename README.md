@@ -14,8 +14,8 @@
 - Jesse Angelopolus
 
 #### User Interface
-- Samantha Hughson
-- Jacob Briand
+- Samantha Hughson1
+- Jacob Briand3
 - Simeon Grosu
 - Jared Gonsalves
 
