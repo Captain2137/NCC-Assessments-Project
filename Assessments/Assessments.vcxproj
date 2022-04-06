@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Calculations.cpp" />
     <ClCompile Include="CommandLine.cpp" />
     <ClCompile Include="CourseData.cpp" />
     <ClCompile Include="Curl.cpp" />
@@ -124,6 +125,7 @@
     <ClCompile Include="VisualizationForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Calculations.h" />
     <ClInclude Include="CommandLine.h" />
     <ClInclude Include="CourseData.h" />
     <ClInclude Include="Curl.h" />
