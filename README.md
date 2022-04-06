@@ -16,8 +16,8 @@
 - Nathan Jabbour
 
 #### User Interface
-- Samantha Hughson1
-- Jacob Briand3
+- Samantha Hughson
+- Jacob Briand
 - Simeon Grosu
 - Jared Gonsalves
 
