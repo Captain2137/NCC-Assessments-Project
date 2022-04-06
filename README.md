@@ -15,7 +15,7 @@
 
 #### User Interface
 - Samantha Hughson
-- Jacob Briand
+- Jacob Briand2
 - Simeon Grosu
 - Jared Gonsalves
 
