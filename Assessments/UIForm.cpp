@@ -12,7 +12,7 @@ System::Void Assessments::UIForm::enterBtn_Click(System::Object^ sender, System:
 	// Set auth as what user put in textBox1
 	auth = authKey->Text;
 
-	std::string rawJson = Curl::request("https://canvas-prod.ccsnh.edu/api/v1/courses?per_page=100&access_token=" + msclr::interop::marshal_as<std::string>(authKey->Text));
+	std::string rawJson = Curl::request("https://canvas.nashuaweb.net/api/v1/courses/1/outcome_results?per_page=100&access_token=" + msclr::interop::marshal_as<std::string>(authKey->Text));
 
     JSONCPP_STRING errs;
     Json::Value root;

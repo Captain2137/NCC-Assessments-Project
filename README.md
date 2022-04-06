@@ -16,7 +16,7 @@
 - FILL_IN_MISSING_NAME
 
 #### User Interface
-- Samantha Hughson
+- Samantha Hughson 2
 - Jacob Briand
 - Simeon Grosu
 - Jared Gonsalves
