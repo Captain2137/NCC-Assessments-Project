@@ -35,7 +35,6 @@ std::string curl::request(std::string url) {
 
         // Debug: Print HTTP code, curl result, readBuffer contents
         std::cout << "HTTP Code: " << httpCode << ", Curl result: " << curl_easy_strerror(res) << std::endl;
-        std::cout << "Read Buffer: " << readBuffer << std::endl << std::endl;
 
         return readBuffer;
     } else {    // If initialisation failed

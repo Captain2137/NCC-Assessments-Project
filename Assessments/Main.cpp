@@ -12,7 +12,6 @@
 // https://curl.se/download.html
 //
 // JSON thanks to:
-// https://github.com/open-source-parsers/jsoncpp
 // https://github.com/nlohmann/json
 */
 
@@ -27,7 +26,9 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>      // Needed for stringstream
-#include <json/json.h>  // Needed to read data fetched from online servers
+#include <nlohmann/json.hpp>    // Needed to read data fetched from online servers
+
+using json = nlohmann::json;
 
 // Needed for Windows Form
 using namespace System;
@@ -37,7 +38,6 @@ using namespace curl;
 
 void debugPrint(const std::vector<int> courseNums, const std::string auth, std::vector<CourseData>* courses); // Debug test to print data to console
 int readCSV(std::vector<CourseData>* courses, std::string fileName);    // Read in data from CSV file
-void listCourses(std::string rawJson);      // List courses from json given by online server
 
 [STAThread]
 
@@ -289,29 +289,5 @@ void debugPrint(const std::vector<int> courseNums, const std::string auth, std::
             std::cout << courses->at(i).getDeviation()->at(j) << ",";
         }
         std::cout << std::endl << std::endl;
-    }
-}
-
-// List courses from json given by online server
-void listCourses(std::string rawJson) {
-    JSONCPP_STRING errs;
-    Json::Value root;
-
-    Json::CharReaderBuilder builder;
-    std::unique_ptr<Json::CharReader> const reader(builder.newCharReader());
-    if (!reader->parse(rawJson.c_str(), rawJson.c_str() + rawJson.length(), &root, &errs)) {
-        std::cout << errs << std::endl;
-        return;
-    }
-
-    try {
-        std::cout << "Errors: " << root.isMember("errors");
-        std::cout << "Your courses: ";
-        for (int i = 0; i < root.size(); i++) {
-            std::cout << root[i]["id"].asInt() << ", ";
-        }
-        std::cout << std::endl << std::endl;
-    } catch (const std::exception& e) {
-        std::cout << "Error: " << e.what() << std::endl << std::endl;
     }
 }
