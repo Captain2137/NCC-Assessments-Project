@@ -12,6 +12,8 @@
 #### Visualization
 - Samuel Bean
 - Jesse Angelopolus
+- Anthony Basque
+- Nathan Jabbour
 
 #### User Interface
 - Samantha Hughson

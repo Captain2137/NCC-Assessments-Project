@@ -34,6 +34,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UISelectCourses.cpp">
+	<Filter>Source Files</Filter>
+    	</ClCompile>
+    <ClCompile Include="Calculations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UISelectCourses.h">
+	<Filter>Source Files</Filter>
+	    </ClCompile>
+    <ClInclude Include="Calculations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
