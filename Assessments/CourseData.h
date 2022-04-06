@@ -21,6 +21,8 @@ public:
 
     CourseData() {};    // Default constructor
 
+    void Calculate();   // Calculate
+
     void setCourseNum(int courseNumIn) { courseNum = courseNumIn; }                 // Sets course number
     void setYear(int yearIn) { year = yearIn; }                                     // Sets year
     void setSemester(std::string semesterIn) { semester = semesterIn; }             // Sets semester
