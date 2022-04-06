@@ -16,6 +16,7 @@
 */
 
 #include "UIForm.h"
+#include "UISelectCourses.h"
 #include "VisualizationForm.h"
 #include "CommandLine.h"
 #include "CourseData.h"
@@ -73,6 +74,10 @@ int main(int argc, char* argv[]) {
 
         // Debug: Prints auth and course numbers to console with course data
         debugPrint(courseNums, auth, &courses);
+
+        // Define select form and send course numbers vector address
+        Assessments::UISelectCourses select(&courseNums);
+        Application::Run(% select); // Run select form
 
         // Define Visualization form sending course data vector address
         Assessments::VisualizationForm visualization(&courses);
