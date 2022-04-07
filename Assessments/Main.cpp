@@ -38,6 +38,7 @@ using namespace curl;
 
 void debugPrint(const std::vector<int> courseNums, const std::string auth, std::vector<CourseData>* courses); // Debug test to print data to console
 int readCSV(std::vector<CourseData>* courses, std::string fileName);    // Read in data from CSV file
+void saveData(std::vector<CourseData>* courses);
 
 [STAThread]
 
@@ -73,6 +74,8 @@ int main(int argc, char* argv[]) {
 
         // Debug: Prints auth and course numbers to console with course data
         debugPrint(courseNums, auth, &courses);
+
+        saveData(&courses);
 
         // Define Visualization form sending course data vector address
         Assessments::VisualizationForm visualization(&courses);
@@ -224,6 +227,73 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
     }
 
     return EXIT_SUCCESS;
+}
+
+void saveData(std::vector<CourseData>* courses) {
+    std::ofstream outFile;
+    outFile.open("CSVTest.csv");
+
+    // Go through course data vector and print contents to console
+    for (int i = 0; i < (int)courses->size(); i++) {
+        outFile << courses->at(i).getYear() << ",";
+        outFile << courses->at(i).getSemester() << ",";
+        outFile << courses->at(i).getCode() << ",";
+        outFile << courses->at(i).getName() << ",";
+        outFile << courses->at(i).getSection() << ",";
+        outFile << courses->at(i).getProf() << ",";
+        outFile << courses->at(i).getCourseNum() << "," << std::endl;
+
+        // Print comps contents to console
+        outFile << "Students,";
+        for (int j = 0; j < (int)courses->at(i).getComps()->size(); j++) {
+            outFile << courses->at(i).getComps()->at(j) << ",";
+        }
+        outFile << std::endl;
+
+        // Print data contents to console
+        for (int j = 0; j < (int)courses->at(i).getData()->size(); j++) {
+            outFile << "Student " << j + 1 << ",";
+            for (int k = 0; k < (int)courses->at(i).getData()->at(j).size(); k++) {
+                outFile << courses->at(i).getData()->at(j).at(k) << ",";
+            }
+            outFile << std::endl;
+        }
+
+        // Print average contents to console
+        outFile << "Average,";
+        for (int j = 0; j < (int)courses->at(i).getAverage()->size(); j++) {
+            outFile << courses->at(i).getAverage()->at(j) << ",";
+        }
+
+        // Print median contents to console
+        outFile << "\nMedian,";
+        for (int j = 0; j < (int)courses->at(i).getMedian()->size(); j++) {
+            outFile << courses->at(i).getMedian()->at(j) << ",";
+        }
+
+        // Print percent contents to console
+        outFile << "\nPercent,";
+        for (int j = 0; j < (int)courses->at(i).getPercent()->size(); j++) {
+            outFile << courses->at(i).getPercent()->at(j) << ",";
+        }
+
+        // Print deviation contents to console
+        outFile << "\nDeviation,";
+        for (int j = 0; j < (int)courses->at(i).getDeviation()->size(); j++) {
+            outFile << courses->at(i).getDeviation()->at(j) << ",";
+        }
+        outFile << std::endl << std::endl;
+    }
+
+    if (courses->size() > 1) {
+        /// <summary>
+        /// recursive call that ideally would send the calculations function the vector of courses if there are more than 1
+        /// of them.  The calculations function will generate a new vector with 1 object and execute the saveData function again to
+        /// generate the combined CSVs
+        /// </summary>
+        /// <param name="courses"></param>
+        saveData(Calculations());
+    }
 }
 
 // Debug test to print course numbers, authorization key, and course data to console
