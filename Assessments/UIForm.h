@@ -58,12 +58,16 @@ namespace Assessments {
 			// 
 			// enterBtn
 			// 
+			this->enterBtn->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
+			this->enterBtn->AutoSize = true;
 			this->enterBtn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->enterBtn->Location = System::Drawing::Point(452, 268);
+			this->enterBtn->Location = System::Drawing::Point(489, 283);
 			this->enterBtn->Margin = System::Windows::Forms::Padding(2);
+			this->enterBtn->MaximumSize = System::Drawing::Size(112, 44);
+			this->enterBtn->MinimumSize = System::Drawing::Size(112, 44);
 			this->enterBtn->Name = L"enterBtn";
-			this->enterBtn->Size = System::Drawing::Size(112, 38);
+			this->enterBtn->Size = System::Drawing::Size(112, 44);
 			this->enterBtn->TabIndex = 0;
 			this->enterBtn->Text = L"Enter";
 			this->enterBtn->UseVisualStyleBackColor = true;
@@ -71,9 +75,12 @@ namespace Assessments {
 			// 
 			// authKey
 			// 
+			this->authKey->AcceptsReturn = true;
+			this->authKey->AcceptsTab = true;
+			this->authKey->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
 			this->authKey->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->authKey->Location = System::Drawing::Point(208, 266);
+			this->authKey->Location = System::Drawing::Point(243, 283);
 			this->authKey->Margin = System::Windows::Forms::Padding(2);
 			this->authKey->Name = L"authKey";
 			this->authKey->Size = System::Drawing::Size(242, 44);
@@ -82,26 +89,29 @@ namespace Assessments {
 			// 
 			// label1
 			// 
+			this->label1->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(65, 269);
+			this->label1->Location = System::Drawing::Point(61, 284);
 			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
-			this->label1->MinimumSize = System::Drawing::Size(112, 38);
+			this->label1->MaximumSize = System::Drawing::Size(173, 44);
+			this->label1->MinimumSize = System::Drawing::Size(112, 44);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(139, 38);
+			this->label1->Size = System::Drawing::Size(173, 44);
 			this->label1->TabIndex = 2;
-			this->label1->Text = L"API Key:";
+			this->label1->Text = L"Canvas Token:";
+			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			this->label1->Click += gcnew System::EventHandler(this, &UIForm::label1_Click);
 			// 
 			// UIForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 			this->BackColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			this->ClientSize = System::Drawing::Size(644, 374);
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->ClientSize = System::Drawing::Size(677, 371);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->authKey);
 			this->Controls->Add(this->enterBtn);
@@ -110,7 +120,7 @@ namespace Assessments {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"UIForm";
-			this->Text = L"UIForm";
+			this->Text = L"Canvas Token Form";
 			this->Load += gcnew System::EventHandler(this, &UIForm::UIForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();

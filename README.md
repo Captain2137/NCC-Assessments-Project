@@ -13,7 +13,7 @@
 - Samuel Bean
 - Jesse Angelopolus
 - Anthony Basque
-- Nathan Jabbour
+- Nathan J. Jabbour
 
 #### User Interface
 - Samantha Hughson
