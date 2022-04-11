@@ -331,7 +331,7 @@ void calculations::calcData(std::vector<CourseData>& courses,
 	// For all courses in the vector
 	for (int i = 0; i < courseSize; i++) {
 		// Copy the course data for the current course
-		std::vector<std::vector<double>> courseData = courses[i].copyData();
+		std::vector<std::vector<int>> courseData = courses[i].copyData();
 		// The number of students in the current course
 		int classSize = courseData.size();
 		// For all comps in the vector
@@ -372,7 +372,7 @@ void calculations::calcData(CourseData course,
 	// The number of competencies in the courses
 	int compSize = course.getNumComps();
 	// Copy the course data for the course
-	std::vector<std::vector<double>> courseData = course.copyData();
+	std::vector<std::vector<int>> courseData = course.copyData();
 	// The number of students in the course
 	int classSize = courseData.size();
 	// 2D vector to hold the data from the class for each comp
