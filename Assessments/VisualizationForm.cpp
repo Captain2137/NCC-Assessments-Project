@@ -5,7 +5,7 @@ Assessments::VisualizationForm::VisualizationForm(std::vector<CourseData>* in) {
 	InitializeComponent();
 
 	// Go through courses vector and add data to textBox1 for each course
-	for (int i = 0; i < 1; i++) {	// Replace 1 with (int)in->size() when course data works
+	for (int i = 0; i < (int)in->size(); i++) {
 
 		// Add course info and Competencies label
 		textBox1->Text += in->at(i).getYear() + " ";
@@ -61,6 +61,6 @@ Assessments::VisualizationForm::VisualizationForm(std::vector<CourseData>* in) {
 		for (int j = 0; j < (int)in->at(i).getDeviation()->size(); j++) {
 			textBox1->Text += in->at(i).getDeviation()->at(j) + " ";
 		}
-		textBox1->Text += "\r\n";	// Next line
+		textBox1->Text += "\r\n\r\n";	// Next line
 	}
 }

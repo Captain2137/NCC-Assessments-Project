@@ -91,6 +91,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libcurl.dll.a;%(AdditionalDependencies)</AdditionalDependencies>
@@ -119,7 +120,7 @@
     <ClCompile Include="Calculations.cpp" />
     <ClCompile Include="CommandLine.cpp" />
     <ClCompile Include="CourseData.cpp" />
-    <ClCompile Include="Curl.cpp" />
+    <ClCompile Include="Util.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="UIForm.cpp" />
     <ClCompile Include="UISelectCourses.cpp" />
@@ -129,7 +130,7 @@
     <ClInclude Include="Calculations.h" />
     <ClInclude Include="CommandLine.h" />
     <ClInclude Include="CourseData.h" />
-    <ClInclude Include="Curl.h" />
+    <ClInclude Include="Util.h" />
     <ClInclude Include="UIForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>

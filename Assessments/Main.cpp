@@ -20,25 +20,24 @@
 #include "VisualizationForm.h"
 #include "CommandLine.h"
 #include "CourseData.h"
-#include "Curl.h"
-#include <msclr/marshal_cppstd.h>   // Needed to convert String^ to String
+#include "Util.h"
 #include <string>
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <ctime>        // Needed to get the date
+#include <filesystem>   // Needed to make dir
 #include <sstream>      // Needed for stringstream
 #include <nlohmann/json.hpp>    // Needed to read data fetched from online servers
-
-using json = nlohmann::json;
+#include <msclr/marshal_cppstd.h>   // Needed to convert String^ to String
 
 // Needed for Windows Form
 using namespace System;
 using namespace System::Windows::Forms;
 
-using namespace curl;
-
-void debugPrint(const std::vector<int> courseNums, const std::string auth, std::vector<CourseData>* courses); // Debug test to print data to console
 int readCSV(std::vector<CourseData>* courses, std::string fileName);    // Read in data from CSV file
+int saveData(std::vector<CourseData>* courses); // Save data as .csv files
+void debugPrint(const std::vector<int> courseNums, const std::string auth, std::vector<CourseData>* courses); // Debug test to print data to console
 
 [STAThread]
 
@@ -48,12 +47,12 @@ int main(int argc, char* argv[]) {
         std::vector<CourseData> courses;    // Vector array holding course data for each course
         std::string auth;                   // String holding authorization key
 
-        // Read in test CSV
-        if (readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv") == EXIT_FAILURE)
+        // Debug: Read in test CSV
+        if (readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv"))
             return EXIT_FAILURE;
 
-        // Debug: Prints auth and course numbers to console with course data
-        debugPrint(courseNums, auth, &courses);
+        // Debug: Read in same test CSV for total.csv test
+        readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv");
 
         // Set Windows Form Styles
         Application::EnableVisualStyles();
@@ -74,6 +73,10 @@ int main(int argc, char* argv[]) {
 
         // Debug: Prints auth and course numbers to console with course data
         debugPrint(courseNums, auth, &courses);
+
+        // Save data as .csv's
+        if (saveData(&courses))
+            return EXIT_FAILURE;
 
         // Define select form and send course numbers vector address
         Assessments::UISelectCourses select(&courseNums);
@@ -176,7 +179,7 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
 
         // Get the rest of the substrings in line and save them as medians
         while (std::getline(str, text, ',')) {  // Keeps looping till end of string
-            course.addMedian(std::stoi(text));
+            course.addMedian(std::stod(text));
         }
 
         getline(file, line);            // Get second from last line from file
@@ -217,6 +220,206 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
     } catch (const std::invalid_argument& e) {
         // If error happends while reading file
         std::cout << "Error: " << e.what() << ", file \"" << fileName << "\" not compatible\n\n";
+        return EXIT_FAILURE;
+    } catch (const std::exception& e) {
+        // If another error happends
+        std::cout << "Error: " << e.what() << std::endl << std::endl;
+        return EXIT_FAILURE;
+    } catch (...) {
+        // If error unknown happends
+        std::cout << "Error: Unknown\n\n";
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
+}
+
+int saveData(std::vector<CourseData>* courses) {
+    struct tm newtime;                          // To store time
+    char today[9];                              // MM-DD-YY
+    time_t now = time(0);                       // Get current time
+    localtime_s(&newtime, &now);                // Set time in newtime
+    strftime(today, 9, "%m-%d-%y", &newtime);   // Format time to MM-DD-YY
+    std::string date = today;                   // Convert to string
+
+    // Made new folder in root directory if does not exist
+    std::filesystem::create_directory(date);
+
+    bool multi = courses->size() > 1;           // Flag if multiple courses
+    std::vector<std::vector<int>> totalData;    // 2D vector to store total data
+    remove((date + "/Total.csv").c_str());      // Delete old file if exists
+    std::string fileName;                       // To store file name
+    
+    try {
+        // Go through course data vector and save contents to file
+        for (int i = 0; i < (int)courses->size(); i++) {
+            // Create and open file following format in folder named after the date:
+            // YEAR-SEMESTER-CODE-ID-SECTION-INSTRUCTOR.csv
+            fileName = date + "/"
+                + msclr::interop::marshal_as<std::string>(courses->at(i).getYear().ToString())
+                + "-" + courses->at(i).getSemester() + "-" + courses->at(i).getCode() + "-"
+                + msclr::interop::marshal_as<std::string>(courses->at(i).getCourseNum().ToString())
+                + "-" + courses->at(i).getSection() + "-" + courses->at(i).getProf() + ".csv";
+            std::ofstream outFile(fileName);
+
+            // Throws errors if writing of file failed
+            outFile.exceptions(std::ifstream::badbit | std::ifstream::failbit | std::ifstream::goodbit);
+
+            // Save course year, semester, code, name, section, professor's name, and course number to file
+            outFile << courses->at(i).getYear() << ",";
+            outFile << courses->at(i).getSemester() << ",";
+            outFile << courses->at(i).getCode() << ",";
+            outFile << courses->at(i).getName() << ",";
+            outFile << courses->at(i).getSection() << ",";
+            outFile << courses->at(i).getProf() << ",";
+            outFile << courses->at(i).getCourseNum() << "," << std::endl;
+
+            // Save comps contents to file
+            outFile << "Students,";
+            for (int j = 0; j < (int)courses->at(i).getComps()->size(); j++) {
+                outFile << courses->at(i).getComps()->at(j) << ",";
+            }
+            outFile << std::endl;
+
+            // Save data contents to file
+            for (int j = 0; j < (int)courses->at(i).getData()->size(); j++) {
+                outFile << "Student " << j + 1 << ",";
+                for (int k = 0; k < (int)courses->at(i).getData()->at(j).size(); k++) {
+                    outFile << courses->at(i).getData()->at(j).at(k) << ",";
+                }
+                outFile << std::endl;
+            }
+
+            // Save average contents to file
+            outFile << "Average,";
+            for (int j = 0; j < (int)courses->at(i).getAverage()->size(); j++) {
+                outFile << courses->at(i).getAverage()->at(j) << ",";
+            }
+
+            // Save median contents to file
+            outFile << "\nMedian,";
+            for (int j = 0; j < (int)courses->at(i).getMedian()->size(); j++) {
+                outFile << courses->at(i).getMedian()->at(j) << ",";
+            }
+
+            // Save percent contents to file
+            outFile << "\nPercent,";
+            for (int j = 0; j < (int)courses->at(i).getPercent()->size(); j++) {
+                outFile << courses->at(i).getPercent()->at(j) << ",";
+            }
+
+            // Save deviation contents to file
+            outFile << "\nDeviation,";
+            for (int j = 0; j < (int)courses->at(i).getDeviation()->size(); j++) {
+                outFile << courses->at(i).getDeviation()->at(j) << ",";
+            }
+
+            // Close file when done
+            outFile.close();
+
+            if (multi) {    // If multiple courses, print all courses to total.csv
+                // Create and open file total.csv 
+                fileName = date + "/Total.csv";
+                std::ofstream outFile(fileName, std::ios_base::app);
+
+                // Throws errors if writing of file failed
+                outFile.exceptions(std::ifstream::badbit | std::ifstream::failbit | std::ifstream::goodbit);
+
+                // Save course year, semester, code, name, section, professor's name, and course number to file
+                outFile << courses->at(i).getYear() << ",";
+                outFile << courses->at(i).getSemester() << ",";
+                outFile << courses->at(i).getCode() << ",";
+                outFile << courses->at(i).getName() << ",";
+                outFile << courses->at(i).getSection() << ",";
+                outFile << courses->at(i).getProf() << ",";
+                outFile << courses->at(i).getCourseNum() << "," << std::endl;
+
+                // Save comps contents to file
+                outFile << "Students,";
+                for (int j = 0; j < (int)courses->at(i).getComps()->size(); j++) {
+                    outFile << courses->at(i).getComps()->at(j) << ",";
+                }
+                outFile << std::endl;
+
+                // Save data contents to file and add line to totalData
+                for (int j = 0; j < (int)courses->at(i).getData()->size(); j++) {
+                    totalData.push_back(courses->at(i).getData()->at(j));
+
+                    outFile << "Student " << j + 1 << ",";
+                    for (int k = 0; k < (int)courses->at(i).getData()->at(j).size(); k++) {
+                        outFile << courses->at(i).getData()->at(j).at(k) << ",";
+                    }
+                    outFile << std::endl;
+                }
+
+                // Save average contents to file
+                outFile << "Average,";
+                for (int j = 0; j < (int)courses->at(i).getAverage()->size(); j++) {
+                    outFile << courses->at(i).getAverage()->at(j) << ",";
+                }
+
+                // Save median contents to file
+                outFile << "\nMedian,";
+                for (int j = 0; j < (int)courses->at(i).getMedian()->size(); j++) {
+                    outFile << courses->at(i).getMedian()->at(j) << ",";
+                }
+
+                // Save percent contents to file
+                outFile << "\nPercent,";
+                for (int j = 0; j < (int)courses->at(i).getPercent()->size(); j++) {
+                    outFile << courses->at(i).getPercent()->at(j) << ",";
+                }
+
+                // Save deviation contents to file
+                outFile << "\nDeviation,";
+                for (int j = 0; j < (int)courses->at(i).getDeviation()->size(); j++) {
+                    outFile << courses->at(i).getDeviation()->at(j) << ",";
+                }
+                outFile << std::endl << std::endl;
+
+                // Close file when done
+                outFile.close();
+            }
+        }
+
+        if (multi) {// If multiple courses, print totals to total.csv
+            // Open file total.csv
+            fileName = date + "/Total.csv";
+            std::ofstream outFile(fileName, std::ios_base::app);
+
+            // Throws errors if writing of file failed
+            outFile.exceptions(std::ifstream::badbit | std::ifstream::failbit | std::ifstream::goodbit);
+
+            // Save total average contents to file
+            outFile << "Total average,";
+            for (int i = 0; i < totalData.at(i).size(); i++) {
+                outFile << util::calcAvg(totalData.at(i)) << ",";
+            }
+
+            // Save total median contents to file
+            outFile << "\nTotal median,";
+            for (int i = 0; i < totalData.at(i).size(); i++) {
+                outFile << util::calcMedian(totalData.at(i)) << ",";
+            }
+
+            // Save total percent contents to file
+            outFile << "\nTotal percent,";
+            for (int i = 0; i < totalData.at(i).size(); i++) {
+                outFile << util::calcPercent(totalData.at(i)) << ",";
+            }
+
+            // Save total deviation contents to file
+            outFile << "\nTotal deviation,";
+            for (int i = 0; i < totalData.at(i).size(); i++) {
+                outFile << util::calcDeviation(totalData.at(i)) << ",";
+            }
+
+            // Close file when done
+            outFile.close();
+        }
+    } catch (const std::ios_base::failure& e) {
+        // If error happends while opeing file
+        std::cout << "Error: " << e.what() << ", reading of file \"" << fileName << "\" failed\n\n";
         return EXIT_FAILURE;
     } catch (const std::exception& e) {
         // If another error happends

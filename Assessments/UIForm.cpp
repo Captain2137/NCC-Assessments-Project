@@ -1,19 +1,18 @@
-#include "Curl.h"
+#include "Util.h"
 #include "UIForm.h"
 #include <string>
 #include <iostream>
 #include <msclr/marshal_cppstd.h>   // Needed to convert String^ to String
 #include <nlohmann/json.hpp>    // Needed to read data fetched from online servers
 
-using namespace curl;
-using json = nlohmann::json;
+using namespace util;
 
 // On enter button click, get authorization key from authKey, and exit form
 System::Void Assessments::UIForm::enterBtn_Click(System::Object^ sender, System::EventArgs^ e) {
 	auth = authKey->Text;   // Set auth as what user put in textBox1
 
 	// Get data from online server
-	json j = json::parse(curl::request("https://canvas-prod.ccsnh.edu/api/v1/courses?per_page=100&access_token=" + msclr::interop::marshal_as<std::string>(authKey->Text)));
+	nlohmann::json j = nlohmann::json::parse(util::curlRequest("https://canvas-prod.ccsnh.edu/api/v1/courses?per_page=100&access_token=" + msclr::interop::marshal_as<std::string>(authKey->Text)));
 
 	// Debug: Print ran json with formating
 	std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;

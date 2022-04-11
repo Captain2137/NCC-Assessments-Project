@@ -27,7 +27,7 @@
     <ClCompile Include="VisualizationForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Curl.cpp">
+    <ClCompile Include="Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CourseData.cpp">
@@ -53,7 +53,7 @@
     <ClInclude Include="VisualizationForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Curl.h">
+    <ClInclude Include="Util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UISelectCourses.h">
