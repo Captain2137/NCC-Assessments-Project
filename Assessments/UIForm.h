@@ -60,10 +60,10 @@ namespace Assessments {
 			// 
 			this->enterBtn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->enterBtn->Location = System::Drawing::Point(603, 351);
+			this->enterBtn->Location = System::Drawing::Point(452, 268);
 			this->enterBtn->Margin = System::Windows::Forms::Padding(2);
 			this->enterBtn->Name = L"enterBtn";
-			this->enterBtn->Size = System::Drawing::Size(149, 50);
+			this->enterBtn->Size = System::Drawing::Size(112, 38);
 			this->enterBtn->TabIndex = 0;
 			this->enterBtn->Text = L"Enter";
 			this->enterBtn->UseVisualStyleBackColor = true;
@@ -73,10 +73,10 @@ namespace Assessments {
 			// 
 			this->authKey->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->authKey->Location = System::Drawing::Point(278, 348);
+			this->authKey->Location = System::Drawing::Point(208, 266);
 			this->authKey->Margin = System::Windows::Forms::Padding(2);
 			this->authKey->Name = L"authKey";
-			this->authKey->Size = System::Drawing::Size(321, 53);
+			this->authKey->Size = System::Drawing::Size(242, 44);
 			this->authKey->TabIndex = 1;
 			this->authKey->TextChanged += gcnew System::EventHandler(this, &UIForm::authKey_TextChanged);
 			// 
@@ -85,22 +85,23 @@ namespace Assessments {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(99, 350);
-			this->label1->MinimumSize = System::Drawing::Size(149, 50);
+			this->label1->Location = System::Drawing::Point(65, 269);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label1->MinimumSize = System::Drawing::Size(112, 38);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(174, 50);
+			this->label1->Size = System::Drawing::Size(139, 38);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"API Key:";
 			this->label1->Click += gcnew System::EventHandler(this, &UIForm::label1_Click);
 			// 
 			// UIForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 17);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			this->ClientSize = System::Drawing::Size(859, 489);
+			this->ClientSize = System::Drawing::Size(644, 374);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->authKey);
 			this->Controls->Add(this->enterBtn);
