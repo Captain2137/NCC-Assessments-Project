@@ -21,6 +21,8 @@
 - Simeon Grosu
 - Jared Gonsalves
 
+this is a test
+
 ## Features
 
 1. Dual-mode - will accept command line arguments, if none, will offer a GUI

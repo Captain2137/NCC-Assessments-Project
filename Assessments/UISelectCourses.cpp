@@ -1,11 +1,13 @@
 #include "UISelectCourses.h"
-#include "Curl.h"
+//#include "Curl.h"
 #include <string>
 #include <iostream>
 #include <msclr/marshal_cppstd.h>   // Needed to convert String^ to String
 #include <nlohmann/json.hpp>    // Needed to read data fetched from online servers
 
-using namespace curl;
+#include "Util.h"
+
+//using namespace curl;
 using json = nlohmann::json;
 // On enter button click, get authorization key from authKey, and exit form
 System::Void Assessments::UISelectCourses::enterBtn_Click(System::Object^ sender, System::EventArgs^ e) {
