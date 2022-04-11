@@ -19,7 +19,7 @@
 #include "VisualizationForm.h"
 #include "CommandLine.h"
 #include "CourseData.h"
-#include "Curl.h"
+#include "Util.h"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -240,9 +240,10 @@ int saveData(std::vector<CourseData>* courses) {
     // Made new folder in root directory if does not exist
     std::filesystem::create_directory(date);
 
-    bool multi = courses->size() > 1;       // Flag if multiple courses
-    remove((date + "/Total.csv").c_str());  // Delete old file if exists
-    std::string fileName;                   // To store file name
+    bool multi = courses->size() > 1;           // Flag if multiple courses
+    std::vector<std::vector<int>> totalData;    // 2D vector to store total data
+    remove((date + "/Total.csv").c_str());      // Delete old file if exists
+    std::string fileName;                       // To store file name
     
     try {
         // Go through course data vector and save contents to file
@@ -335,8 +336,10 @@ int saveData(std::vector<CourseData>* courses) {
                 }
                 outFile << std::endl;
 
-                // Save data contents to file
+                // Save data contents to file and add line to totalData
                 for (int j = 0; j < (int)courses->at(i).getData()->size(); j++) {
+                    totalData.push_back(courses->at(i).getData()->at(j));
+
                     outFile << "Student " << j + 1 << ",";
                     for (int k = 0; k < (int)courses->at(i).getData()->at(j).size(); k++) {
                         outFile << courses->at(i).getData()->at(j).at(k) << ",";
@@ -372,6 +375,42 @@ int saveData(std::vector<CourseData>* courses) {
                 // Close file when done
                 outFile.close();
             }
+        }
+
+        if (multi) {// If multiple courses, print totals to total.csv
+            // Open file total.csv
+            fileName = date + "/Total.csv";
+            std::ofstream outFile(fileName, std::ios_base::app);
+
+            // Throws errors if writing of file failed
+            outFile.exceptions(std::ifstream::badbit | std::ifstream::failbit | std::ifstream::goodbit);
+
+            // Save total average contents to file
+            outFile << "Total average,";
+            for (int i = 0; i < totalData.at(i).size(); i++) {
+                outFile << util::calcAvg(totalData.at(i)) << ",";
+            }
+
+            // Save total median contents to file
+            outFile << "\nTotal median,";
+            for (int i = 0; i < totalData.at(i).size(); i++) {
+                outFile << util::calcMedian(totalData.at(i)) << ",";
+            }
+
+            // Save total percent contents to file
+            outFile << "\nTotal percent,";
+            for (int i = 0; i < totalData.at(i).size(); i++) {
+                outFile << util::calcPercent(totalData.at(i)) << ",";
+            }
+
+            // Save total deviation contents to file
+            outFile << "\nTotal deviation,";
+            for (int i = 0; i < totalData.at(i).size(); i++) {
+                outFile << util::calcDeviation(totalData.at(i)) << ",";
+            }
+
+            // Close file when done
+            outFile.close();
         }
     } catch (const std::ios_base::failure& e) {
         // If error happends while opeing file
