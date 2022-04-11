@@ -33,12 +33,13 @@ namespace Assessments {
 		}
 	private: System::Windows::Forms::CheckedListBox^ checkedListBox1;
 	private: System::Windows::Forms::ComboBox^ comboBox1;
-	private: System::Windows::Forms::ComboBox^ comboBox2;
+
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::ComboBox^ comboBox2;
 	protected:
 
 	private:
@@ -66,6 +67,8 @@ namespace Assessments {
 			// 
 			// checkedListBox1
 			// 
+			this->checkedListBox1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->checkedListBox1->CheckOnClick = true;
 			this->checkedListBox1->FormattingEnabled = true;
 			this->checkedListBox1->Location = System::Drawing::Point(133, 327);
 			this->checkedListBox1->Name = L"checkedListBox1";
@@ -74,22 +77,29 @@ namespace Assessments {
 			// 
 			// comboBox1
 			// 
+			this->comboBox1->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Location = System::Drawing::Point(342, 192);
+			this->comboBox1->MaxLength = 100;
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(214, 21);
 			this->comboBox1->TabIndex = 2;
 			// 
 			// comboBox2
 			// 
+			this->comboBox2->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->comboBox2->FormattingEnabled = true;
 			this->comboBox2->Location = System::Drawing::Point(342, 219);
+			this->comboBox2->MaxLength = 100;
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(214, 21);
 			this->comboBox2->TabIndex = 3;
 			// 
 			// textBox1
 			// 
+			this->textBox1->AcceptsReturn = true;
+			this->textBox1->AcceptsTab = true;
+			this->textBox1->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->textBox1->Location = System::Drawing::Point(342, 246);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(214, 20);
@@ -97,7 +107,9 @@ namespace Assessments {
 			// 
 			// label1
 			// 
+			this->label1->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->label1->AutoSize = true;
+			this->label1->ForeColor = System::Drawing::SystemColors::ControlText;
 			this->label1->Location = System::Drawing::Point(263, 195);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(73, 13);
@@ -106,6 +118,7 @@ namespace Assessments {
 			// 
 			// label2
 			// 
+			this->label2->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->label2->AutoSize = true;
 			this->label2->Location = System::Drawing::Point(263, 222);
 			this->label2->Name = L"label2";
@@ -115,6 +128,7 @@ namespace Assessments {
 			// 
 			// label3
 			// 
+			this->label3->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->label3->AutoSize = true;
 			this->label3->Location = System::Drawing::Point(234, 249);
 			this->label3->Name = L"label3";
@@ -124,6 +138,7 @@ namespace Assessments {
 			// 
 			// label4
 			// 
+			this->label4->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->label4->AutoSize = true;
 			this->label4->Location = System::Drawing::Point(130, 311);
 			this->label4->Name = L"label4";
@@ -144,7 +159,7 @@ namespace Assessments {
 			this->Controls->Add(this->comboBox2);
 			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->checkedListBox1);
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"UISelectCourses";
 			this->Text = L"UISelectCourses";
 			this->Load += gcnew System::EventHandler(this, &UISelectCourses::UISelectCourses_Load);
