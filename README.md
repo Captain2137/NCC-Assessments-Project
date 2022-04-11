@@ -12,7 +12,7 @@
 #### Visualization
 - Samuel Bean
 - Jesse Angelopolus
-- Anthony Basque
+- Anthony Basque (Testing Push)
 - Nathan Jabbour
 
 #### User Interface
