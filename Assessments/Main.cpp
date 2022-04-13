@@ -236,18 +236,18 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
 
 int saveData(std::vector<CourseData>* courses) {
     struct tm newtime;                          // To store time
-    char today[9];                              // MM-DD-YY
+    char today[9];                              // YY-MM-DD
     time_t now = time(0);                       // Get current time
     localtime_s(&newtime, &now);                // Set time in newtime
-    strftime(today, 9, "%m-%d-%y", &newtime);   // Format time to MM-DD-YY
+    strftime(today, 9, "%y-%m-%d", &newtime);   // Format time to YY-MM-DD
     std::string date = today;                   // Convert to string
 
     // Made new folder in root directory if does not exist
-    std::filesystem::create_directory(date);
+    std::filesystem::create_directories("CSVs/" + date);
 
     bool multi = courses->size() > 1;           // Flag if multiple courses
     std::vector<std::vector<int>> totalData;    // 2D vector to store total data
-    remove((date + "/Total.csv").c_str());      // Delete old file if exists
+    remove(("CSVs/" + date + "/Aggregate.csv").c_str());  // Delete old file if exists
     std::string fileName;                       // To store file name
     
     try {
@@ -255,7 +255,7 @@ int saveData(std::vector<CourseData>* courses) {
         for (int i = 0; i < (int)courses->size(); i++) {
             // Create and open file following format in folder named after the date:
             // YEAR-SEMESTER-CODE-ID-SECTION-INSTRUCTOR.csv
-            fileName = date + "/"
+            fileName = "CSVs/" + date + "/"
                 + msclr::interop::marshal_as<std::string>(courses->at(i).getYear().ToString())
                 + "-" + courses->at(i).getSemester() + "-" + courses->at(i).getCode() + "-"
                 + msclr::interop::marshal_as<std::string>(courses->at(i).getCourseNum().ToString())
@@ -296,95 +296,95 @@ int saveData(std::vector<CourseData>* courses) {
                 outFile << courses->at(i).getAverage()->at(j) << ",";
             }
 
-// Save median contents to file
-outFile << "\nMedian,";
-for (int j = 0; j < (int)courses->at(i).getMedian()->size(); j++) {
-    outFile << courses->at(i).getMedian()->at(j) << ",";
-}
+            // Save median contents to file
+            outFile << "\nMedian,";
+            for (int j = 0; j < (int)courses->at(i).getMedian()->size(); j++) {
+                outFile << courses->at(i).getMedian()->at(j) << ",";
+            }
 
-// Save percent contents to file
-outFile << "\nPercent,";
-for (int j = 0; j < (int)courses->at(i).getPercent()->size(); j++) {
-    outFile << courses->at(i).getPercent()->at(j) << ",";
-}
+            // Save percent contents to file
+            outFile << "\nPercent,";
+            for (int j = 0; j < (int)courses->at(i).getPercent()->size(); j++) {
+                outFile << courses->at(i).getPercent()->at(j) << ",";
+            }
 
-// Save deviation contents to file
-outFile << "\nDeviation,";
-for (int j = 0; j < (int)courses->at(i).getDeviation()->size(); j++) {
-    outFile << courses->at(i).getDeviation()->at(j) << ",";
-}
+            // Save deviation contents to file
+            outFile << "\nDeviation,";
+            for (int j = 0; j < (int)courses->at(i).getDeviation()->size(); j++) {
+                outFile << courses->at(i).getDeviation()->at(j) << ",";
+            }
 
-// Close file when done
-outFile.close();
+            // Close file when done
+            outFile.close();
 
             if (multi) {    // If multiple courses, print all courses to total.csv
-                // Create and open file total.csv 
-                fileName = date + "/Aggregate.csv";
+                // Create and open file Aggregate.csv 
+                fileName = "CSVs/" + date + "/Aggregate.csv";
                 std::ofstream outFile(fileName, std::ios_base::app);
 
-    // Throws errors if writing of file failed
-    outFile.exceptions(std::ifstream::badbit | std::ifstream::failbit | std::ifstream::goodbit);
+                // Throws errors if writing of file failed
+                outFile.exceptions(std::ifstream::badbit | std::ifstream::failbit | std::ifstream::goodbit);
 
-    // Save course year, semester, code, name, section, professor's name, and course number to file
-    outFile << courses->at(i).getYear() << ",";
-    outFile << courses->at(i).getSemester() << ",";
-    outFile << courses->at(i).getCode() << ",";
-    outFile << courses->at(i).getName() << ",";
-    outFile << courses->at(i).getSection() << ",";
-    outFile << courses->at(i).getProf() << ",";
-    outFile << courses->at(i).getCourseNum() << "," << std::endl;
+                // Save course year, semester, code, name, section, professor's name, and course number to file
+                outFile << courses->at(i).getYear() << ",";
+                outFile << courses->at(i).getSemester() << ",";
+                outFile << courses->at(i).getCode() << ",";
+                outFile << courses->at(i).getName() << ",";
+                outFile << courses->at(i).getSection() << ",";
+                outFile << courses->at(i).getProf() << ",";
+                outFile << courses->at(i).getCourseNum() << "," << std::endl;
 
-    // Save comps contents to file
-    outFile << "Students,";
-    for (int j = 0; j < (int)courses->at(i).getComps()->size(); j++) {
-        outFile << courses->at(i).getComps()->at(j) << ",";
-    }
-    outFile << std::endl;
+                // Save comps contents to file
+                outFile << "Students,";
+                for (int j = 0; j < (int)courses->at(i).getComps()->size(); j++) {
+                    outFile << courses->at(i).getComps()->at(j) << ",";
+                }
+                outFile << std::endl;
 
-    // Save data contents to file and add line to totalData
-    for (int j = 0; j < (int)courses->at(i).getData()->size(); j++) {
-        totalData.push_back(courses->at(i).getData()->at(j));
+                // Save data contents to file and add line to totalData
+                for (int j = 0; j < (int)courses->at(i).getData()->size(); j++) {
+                    totalData.push_back(courses->at(i).getData()->at(j));
 
-        outFile << "Student " << j + 1 << ",";
-        for (int k = 0; k < (int)courses->at(i).getData()->at(j).size(); k++) {
-            outFile << courses->at(i).getData()->at(j).at(k) << ",";
+                    outFile << "Student " << j + 1 << ",";
+                    for (int k = 0; k < (int)courses->at(i).getData()->at(j).size(); k++) {
+                        outFile << courses->at(i).getData()->at(j).at(k) << ",";
+                    }
+                    outFile << std::endl;
+                }
+
+                // Save average contents to file
+                outFile << "Average,";
+                for (int j = 0; j < (int)courses->at(i).getAverage()->size(); j++) {
+                    outFile << courses->at(i).getAverage()->at(j) << ",";
+                }
+
+                // Save median contents to file
+                outFile << "\nMedian,";
+                for (int j = 0; j < (int)courses->at(i).getMedian()->size(); j++) {
+                    outFile << courses->at(i).getMedian()->at(j) << ",";
+                }
+
+                // Save percent contents to file
+                outFile << "\nPercent,";
+                for (int j = 0; j < (int)courses->at(i).getPercent()->size(); j++) {
+                    outFile << courses->at(i).getPercent()->at(j) << ",";
+                }
+
+                // Save deviation contents to file
+                outFile << "\nDeviation,";
+                for (int j = 0; j < (int)courses->at(i).getDeviation()->size(); j++) {
+                    outFile << courses->at(i).getDeviation()->at(j) << ",";
+                }
+                outFile << std::endl << std::endl;
+
+                // Close file when done
+                outFile.close();
+            }
         }
-        outFile << std::endl;
-    }
 
-    // Save average contents to file
-    outFile << "Average,";
-    for (int j = 0; j < (int)courses->at(i).getAverage()->size(); j++) {
-        outFile << courses->at(i).getAverage()->at(j) << ",";
-    }
-
-    // Save median contents to file
-    outFile << "\nMedian,";
-    for (int j = 0; j < (int)courses->at(i).getMedian()->size(); j++) {
-        outFile << courses->at(i).getMedian()->at(j) << ",";
-    }
-
-    // Save percent contents to file
-    outFile << "\nPercent,";
-    for (int j = 0; j < (int)courses->at(i).getPercent()->size(); j++) {
-        outFile << courses->at(i).getPercent()->at(j) << ",";
-    }
-
-    // Save deviation contents to file
-    outFile << "\nDeviation,";
-    for (int j = 0; j < (int)courses->at(i).getDeviation()->size(); j++) {
-        outFile << courses->at(i).getDeviation()->at(j) << ",";
-    }
-    outFile << std::endl << std::endl;
-
-    // Close file when done
-    outFile.close();
-}
-        }
-
-        if (multi) {// If multiple courses, print totals to total.csv
-            // Open file total.csv
-            fileName = date + "/Aggregate.csv";
+        if (multi) {    // If multiple courses, print totals to total.csv
+            // Open file Aggregate.csv
+            fileName = "CSVs/" + date + "/Aggregate.csv";
             std::ofstream outFile(fileName, std::ios_base::app);
 
             // Throws errors if writing of file failed
@@ -398,29 +398,29 @@ outFile.close();
 
             // Save total average contents to file
             outFile << "Aggregate Average,";
-            for (int i = 0; i < totalData.at(i).size(); i++) {
-                outFile << util::calcAvg(totalData.at(i)) << ",";
+            for (int i = 0; i < compSize; i++) {
+                outFile << calcedData.at(0).at(i) << ",";
             }
             std::cout << std::endl;
 
             // Save total median contents to file
             outFile << "\nAggregate Median,";
-            for (int i = 0; i < totalData.at(i).size(); i++) {
-                outFile << util::calcMedian(totalData.at(i)) << ",";
+            for (int i = 0; i < compSize; i++) {
+                outFile << calcedData.at(1).at(i) << ",";
             }
             std::cout << std::endl;
 
             // Save total percent contents to file
             outFile << "\nAggregate Percent,";
-            for (int i = 0; i < totalData.at(i).size(); i++) {
-                outFile << util::calcPercent(totalData.at(i)) << ",";
+            for (int i = 0; i < compSize; i++) {
+                outFile << calcedData.at(2).at(i) << ",";
             }
             std::cout << std::endl;
 
             // Save total deviation contents to file
             outFile << "\nAggregate Deviation,";
-            for (int i = 0; i < totalData.at(i).size(); i++) {
-                outFile << util::calcDeviation(totalData.at(i)) << ",";
+            for (int i = 0; i < compSize; i++) {
+                outFile << calcedData.at(3).at(i) << ",";
             }
             std::cout << std::endl;
 

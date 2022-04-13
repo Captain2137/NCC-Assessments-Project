@@ -4,7 +4,10 @@
 #include <algorithm>
 #include <cmath>
 
-using namespace util;
+double calcAvg(std::vector<int> scores);		// Calculates the average of a vector of doubles
+double calcMedian(std::vector<int> scores);		// Calculates the median of a vector of doubles
+double calcPercent(std::vector<int> scores);    // Calculates the percent above three of a vector of doubles
+double calcDeviation(std::vector<int> scores);  // Calculates the standard deviation of a vector of doubles
 
 // Saves data fetched by curl
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
@@ -87,7 +90,7 @@ std::vector<std::vector<double>> util::calcData(std::vector<std::vector<int>> co
 }
 
 // Calculates the average given a vector of doubles
-double util::calcAvg(std::vector<int> scores) {
+double calcAvg(std::vector<int> scores) {
 	int size = scores.size();	// The number of scores in the vector
 	double sum = 0;				// The sum of the scores
 
@@ -104,7 +107,7 @@ double util::calcAvg(std::vector<int> scores) {
 }
 
 // Calculates the median given a vector of doubles
-double util::calcMedian(std::vector<int> scores) {
+double calcMedian(std::vector<int> scores) {
 	int middle = scores.size() / 2;				// The middle score if odd number of scores
 	std::sort(scores.begin(), scores.end());	// Sort the scores in ascending order
 
@@ -122,7 +125,7 @@ double util::calcMedian(std::vector<int> scores) {
 }
 
 // Calculates the number of scores tha are 3 or higher given a vector of doubles
-double util::calcPercent(std::vector<int> scores) {
+double calcPercent(std::vector<int> scores) {
 	int size = scores.size();	// The number of scores in the vector
 	int counter = 0;			// The number of scores that are 3 or higher
 
@@ -139,7 +142,7 @@ double util::calcPercent(std::vector<int> scores) {
 }
 
 // Calculates the standard deviation given a vector of doubles
-double util::calcDeviation(std::vector<int> scores) {
+double calcDeviation(std::vector<int> scores) {
 	int size = scores.size();			// The number of scores in the vector
 	double average = calcAvg(scores);	// Use the calcAvg function to get the average of the scores
 	double sum = 0;						// The sum of the squares of each deviation
