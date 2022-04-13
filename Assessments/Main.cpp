@@ -393,9 +393,12 @@ if (multi) {    // If multiple courses, print all courses to total.csv
             // The 2D vector of the average, median, percent above three, and standard deviation
             std::vector<std::vector<double>> calcedData = util::calcData(totalData);
 
+            // The number of comps in the 2D vector of calced data
+            int compSize = calcedData[0].size();
+
             // Save total average contents to file
             outFile << "Total average,";
-            for (int i = 0; i < calcedData[0].size(); i++) {
+            for (int i = 0; i < compSize; i++) {
                 std::cout << calcedData[0][i] << ",";
                 outFile << calcedData[0][i] << ",";
             }
@@ -403,7 +406,7 @@ if (multi) {    // If multiple courses, print all courses to total.csv
 
             // Save total median contents to file
             outFile << "\nTotal median,";
-            for (int i = 0; i < calcedData[1].size(); i++) {
+            for (int i = 0; i < compSize; i++) {
                 std::cout << calcedData[1][i] << ",";
                 outFile << calcedData[1][i] << ",";
             }
@@ -411,7 +414,7 @@ if (multi) {    // If multiple courses, print all courses to total.csv
 
             // Save total percent contents to file
             outFile << "\nTotal percent,";
-            for (int i = 0; i < calcedData[2].size(); i++) {
+            for (int i = 0; i < compSize; i++) {
                 std::cout << calcedData[2][i] << ",";
                 outFile << calcedData[2][i] << ",";
             }
@@ -419,7 +422,7 @@ if (multi) {    // If multiple courses, print all courses to total.csv
 
             // Save total deviation contents to file
             outFile << "\nTotal deviation,";
-            for (int i = 0; i < calcedData[3].size(); i++) {
+            for (int i = 0; i < compSize; i++) {
                 std::cout << calcedData[3][i] << ",";
                 outFile << calcedData[3][i] << ",";
             }
