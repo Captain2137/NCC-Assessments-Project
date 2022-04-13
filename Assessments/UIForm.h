@@ -35,8 +35,7 @@ namespace Assessments {
 	private: System::Windows::Forms::Button^ enterBtn;
 	private: System::Windows::Forms::TextBox^ authKey;
 	private: System::Windows::Forms::Label^ label1;
-
-
+	protected:
 
 	private:
 		// Required designer variable.
@@ -85,7 +84,6 @@ namespace Assessments {
 			this->authKey->Name = L"authKey";
 			this->authKey->Size = System::Drawing::Size(242, 44);
 			this->authKey->TabIndex = 1;
-			this->authKey->TextChanged += gcnew System::EventHandler(this, &UIForm::authKey_TextChanged);
 			// 
 			// label1
 			// 
@@ -102,7 +100,6 @@ namespace Assessments {
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Canvas Token:";
 			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->label1->Click += gcnew System::EventHandler(this, &UIForm::label1_Click);
 			// 
 			// UIForm
 			// 
@@ -121,7 +118,6 @@ namespace Assessments {
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"UIForm";
 			this->Text = L"Canvas Token Form";
-			this->Load += gcnew System::EventHandler(this, &UIForm::UIForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -130,15 +126,5 @@ namespace Assessments {
 
 		// Auto generated code by double clicking button in UIForm
 	private: System::Void enterBtn_Click(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void UIForm_Load(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-private: System::Void checkedListBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void authKey_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-}
 };
 }

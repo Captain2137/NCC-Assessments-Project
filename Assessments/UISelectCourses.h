@@ -2,7 +2,7 @@
 #include <vector>
 
 namespace Assessments {
-
+	// Needed for windows forms
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -12,28 +12,19 @@ namespace Assessments {
 
 	public ref class UISelectCourses : public System::Windows::Forms::Form {
 	public:
-		std::vector<int>* courses;	// Pointer to given vector to store course numbers
-
-		UISelectCourses(std::vector<int>* in) {
+		UISelectCourses() {
 			InitializeComponent();
-			
-			courses = in;	// Set courses pointer to given address
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		~UISelectCourses()
-		{
+		~UISelectCourses() {
 			if (components)
-			{
 				delete components;
-			}
 		}
+
+		// Auto generated code
 	private: System::Windows::Forms::CheckedListBox^ checkedListBox1;
 	private: System::Windows::Forms::ComboBox^ comboBox1;
-
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
@@ -43,11 +34,10 @@ namespace Assessments {
 	protected:
 
 	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
+		// Required designer variable.
 		System::ComponentModel::Container ^components;
 
+		// DO NOT MODIFY
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// Required method for Designer support - do not modify
@@ -162,15 +152,12 @@ namespace Assessments {
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"UISelectCourses";
 			this->Text = L"UISelectCourses";
-			this->Load += gcnew System::EventHandler(this, &UISelectCourses::UISelectCourses_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+
 		// Auto generated code by double clicking button in UIForm
-	private: System::Void enterBtn_Click(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void UISelectCourses_Load(System::Object^ sender, System::EventArgs^ e) {
-	}
 	};
 }

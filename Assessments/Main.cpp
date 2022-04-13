@@ -65,6 +65,10 @@ int main(int argc, char* argv[]) {
         // Get authorization key from ui and convert it from String^ to String
         auth = msclr::interop::marshal_as<std::string>(ui.getAuth());
 
+        // Define select form and send course numbers vector address
+        Assessments::UISelectCourses select;
+        Application::Run(% select); // Run select form
+
         // Go through courses vector and create CourseData class for each
         //for (int i = 0; i < (int)courseNums.size(); i++) {
         //    courses.push_back(CourseData());
@@ -77,10 +81,6 @@ int main(int argc, char* argv[]) {
         // Save data as .csv's
         if (saveData(&courses))
             return EXIT_FAILURE;
-
-        // Define select form and send course numbers vector address
-        Assessments::UISelectCourses select(&courseNums);
-        Application::Run(% select); // Run select form
 
         // Define Visualization form sending course data vector address
         Assessments::VisualizationForm visualization(&courses);
