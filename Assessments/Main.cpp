@@ -319,7 +319,7 @@ int saveData(std::vector<CourseData>* courses) {
 
             if (multi) {    // If multiple courses, print all courses to total.csv
                 // Create and open file total.csv 
-                fileName = date + "/Total.csv";
+                fileName = date + "/Aggregate.csv";
                 std::ofstream outFile(fileName, std::ios_base::app);
 
                 // Throws errors if writing of file failed
@@ -384,32 +384,32 @@ int saveData(std::vector<CourseData>* courses) {
 
         if (multi) {// If multiple courses, print totals to total.csv
             // Open file total.csv
-            fileName = date + "/Total.csv";
+            fileName = date + "/Aggregate.csv";
             std::ofstream outFile(fileName, std::ios_base::app);
 
             // Throws errors if writing of file failed
             outFile.exceptions(std::ifstream::badbit | std::ifstream::failbit | std::ifstream::goodbit);
 
             // Save total average contents to file
-            outFile << "Total average,";
+            outFile << "Aggregate Average,";
             for (int i = 0; i < totalData.at(i).size(); i++) {
                 outFile << util::calcAvg(totalData.at(i)) << ",";
             }
 
             // Save total median contents to file
-            outFile << "\nTotal median,";
+            outFile << "\nAggregate Median,";
             for (int i = 0; i < totalData.at(i).size(); i++) {
                 outFile << util::calcMedian(totalData.at(i)) << ",";
             }
 
             // Save total percent contents to file
-            outFile << "\nTotal percent,";
+            outFile << "\nAggregate Percent,";
             for (int i = 0; i < totalData.at(i).size(); i++) {
                 outFile << util::calcPercent(totalData.at(i)) << ",";
             }
 
             // Save total deviation contents to file
-            outFile << "\nTotal deviation,";
+            outFile << "\nAggregate Deviation,";
             for (int i = 0; i < totalData.at(i).size(); i++) {
                 outFile << util::calcDeviation(totalData.at(i)) << ",";
             }
