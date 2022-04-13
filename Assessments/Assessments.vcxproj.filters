@@ -15,51 +15,51 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Calculations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CourseData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UIForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CommandLine.cpp">
+    <ClCompile Include="UISelectCourses.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VisualizationForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Util.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CourseData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UISelectCourses.cpp">
-	<Filter>Source Files</Filter>
-    	</ClCompile>
-    <ClCompile Include="Calculations.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CourseData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UIForm.h">
+    <ClInclude Include="Calculations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CommandLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VisualizationForm.h">
+    <ClInclude Include="CourseData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UIForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="UISelectCourses.h">
-	<Filter>Source Files</Filter>
-	    </ClCompile>
-    <ClInclude Include="Calculations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VisualizationForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

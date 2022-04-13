@@ -45,19 +45,45 @@ std::string util::curlRequest(std::string url) {
     }
 }
 
-std::vector<std::vector<double>> util::calc(std::vector<std::vector<int>> data) {
-	int size;
-	int sum;
-	std::vector<int> temp;
-	std::vector<std::vector<double>> results;
+// Calculates the averages, medians, percents above three, and 
+// standard devations in each competency given a 2D vector of courses data
+std::vector<std::vector<double>> util::calcData(std::vector<std::vector<int>> courseData) {
+	// The number of competencies in the courses
+	int compSize = courseData[0].size();
+	// The number of students in the course
+	int classSize = courseData.size();
+	// 2D vector to hold the data from all classes for each comp
+	std::vector<std::vector<int>> compData(compSize, std::vector<int>(0));
+	// 2D vector to hold the calculated data results
+	std::vector<std::vector<double>> calcedData(4, std::vector<double>(0));
 
-	for (int i = 0; i < data.size(); i++) {
-		for (int j = 0; j < data.at(i).size(); j++) {
-
+	// For all comps in the course
+	for (int i = 0; i < compSize; i++) {
+		// For all students in the comp
+		for (int j = 0; j < classSize; j++) {
+			// Add the current student's data for the current comp to the 2D vector
+			compData[i].push_back(courseData[j][i]);
 		}
 	}
 
-	return results;
+	// For all comps in the vector
+	for (int i = 0; i < compSize; i++) {
+		// Calculate the average, median, percent above three, and standard deviation,
+		// for the current comp
+		double average = calcAvg(compData[i]);
+		double median = calcMedian(compData[i]);
+		double percentThree = calcPercent(compData[i]);
+		double deviation = calcDeviation(compData[i]);
+		// Add the average, median, percent above three, and standard deviation
+		// for the current comp to the vector of calculated data
+		calcedData[0].push_back(average);
+		calcedData[1].push_back(median);
+		calcedData[2].push_back(percentThree);
+		calcedData[3].push_back(deviation);
+	}
+
+	// Return the calced data
+	return calcedData;
 }
 
 // Calculates the average given a vector of doubles
