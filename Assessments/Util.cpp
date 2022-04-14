@@ -52,9 +52,9 @@ std::string util::curlRequest(std::string url) {
 // standard devations in each competency given a 2D vector of courses data
 std::vector<std::vector<double>> util::calcData(std::vector<std::vector<int>> courseData) {
 	// The number of competencies in the courses
-	int compSize = courseData[0].size();
+	int compSize = (int)courseData[0].size();
 	// The number of students in the course
-	int classSize = courseData.size();
+	int classSize = (int)courseData.size();
 	// 2D vector to hold the data from all classes for each comp
 	std::vector<std::vector<int>> compData(compSize, std::vector<int>(0));
 	// 2D vector to hold the calculated data results
@@ -91,8 +91,8 @@ std::vector<std::vector<double>> util::calcData(std::vector<std::vector<int>> co
 
 // Calculates the average given a vector of doubles
 double calcAvg(std::vector<int> scores) {
-	int size = scores.size();	// The number of scores in the vector
-	double sum = 0;				// The sum of the scores
+	int size = (int)scores.size();	// The number of scores in the vector
+	double sum = 0;					// The sum of the scores
 
 	// For all scores in the vector
 	for (int i = 0; i < size; i++) {
@@ -108,7 +108,7 @@ double calcAvg(std::vector<int> scores) {
 
 // Calculates the median given a vector of doubles
 double calcMedian(std::vector<int> scores) {
-	int middle = scores.size() / 2;				// The middle score if odd number of scores
+	int middle = (int)scores.size() / 2;		// The middle score if odd number of scores
 	std::sort(scores.begin(), scores.end());	// Sort the scores in ascending order
 
 	// If the number of scores is even
@@ -126,8 +126,8 @@ double calcMedian(std::vector<int> scores) {
 
 // Calculates the number of scores tha are 3 or higher given a vector of doubles
 double calcPercent(std::vector<int> scores) {
-	int size = scores.size();	// The number of scores in the vector
-	int counter = 0;			// The number of scores that are 3 or higher
+	int size = (int)scores.size();	// The number of scores in the vector
+	int counter = 0;				// The number of scores that are 3 or higher
 
 	// For all scores in the vector
 	for (int i = 0; i < size; i++) {
@@ -143,7 +143,7 @@ double calcPercent(std::vector<int> scores) {
 
 // Calculates the standard deviation given a vector of doubles
 double calcDeviation(std::vector<int> scores) {
-	int size = scores.size();			// The number of scores in the vector
+	int size = (int)scores.size();		// The number of scores in the vector
 	double average = calcAvg(scores);	// Use the calcAvg function to get the average of the scores
 	double sum = 0;						// The sum of the squares of each deviation
 
