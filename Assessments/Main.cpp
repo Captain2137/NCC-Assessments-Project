@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
             return EXIT_FAILURE;
 
         // Debug: Read in same test CSV for total.csv test
-        readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv");
+        readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat-1.csv");
 
         // Set Windows Form Styles
         Application::EnableVisualStyles();
@@ -235,6 +235,7 @@ int getData(std::vector<CourseData>* courses, std::vector<int>* courseNums) {
         courses->back().setCourseNum(courseNums->at(i));
 
     }
+    return 0;
 }
 
 // Save data into CSV files
