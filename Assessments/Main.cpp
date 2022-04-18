@@ -43,6 +43,7 @@ void debugPrint(const std::vector<int> courseNums, const std::string auth, std::
 
 int main(int argc, char* argv[]) {
     if (argc <= 1) {
+        std::string userName;               // String holding users name
         std::vector<int> courseNums;        // Vector array holding course numbers
         std::vector<CourseData> courses;    // Vector array holding course data for each course
         std::string auth;                   // String holding authorization key
@@ -59,21 +60,14 @@ int main(int argc, char* argv[]) {
         Application::SetCompatibleTextRenderingDefault(false);
 
         // Define UI form and send course numbers vector address
-        Assessments::UIForm ui(&courseNums);
+        Assessments::UIForm ui(&auth, &userName);
         Application::Run(% ui); // Run UI form
 
-        // Get authorization key from ui and convert it from String^ to String
-        auth = msclr::interop::marshal_as<std::string>(ui.getAuth());
-
         // Define select form and send course numbers vector address
-        Assessments::UISelectCourses select;
+        Assessments::UISelectCourses select(&auth, &userName, &courseNums);
         Application::Run(% select); // Run select form
 
-        // Go through courses vector and create CourseData class for each
-        //for (int i = 0; i < (int)courseNums.size(); i++) {
-        //    courses.push_back(CourseData());
-        //    courses.back().setCourseNum(courseNums[i]);
-        //}
+        //getData(&courses, &courseNums);
 
         // Debug: Prints auth and course numbers to console with course data
         debugPrint(courseNums, auth, &courses);
@@ -234,6 +228,16 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
     return EXIT_SUCCESS;
 }
 
+int getData(std::vector<CourseData>* courses, std::vector<int>* courseNums) {
+    // Go through courses vector and create CourseData class for each
+    for (int i = 0; i < (int)courseNums->size(); i++) {
+        courses->push_back(CourseData());
+        courses->back().setCourseNum(courseNums->at(i));
+
+    }
+}
+
+// Save data into CSV files
 int saveData(std::vector<CourseData>* courses) {
     struct tm newtime;                          // To store time
     char today[9];                              // YY-MM-DD

@@ -97,10 +97,7 @@ double calcAvg(std::vector<int> scores) {
 	// For all scores in the vector
 	for (int i = 0; i < size; i++) {
 		sum += scores[i];
-		std::cout << scores[i] << " ";
 	}
-
-	std::cout << "  Sum: " << sum << "   Size: " << size << std::endl << std::endl;
 
 	// Calculate and return the average score
 	return sum / size;

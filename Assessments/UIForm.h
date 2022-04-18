@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 namespace Assessments {
 	// Needed for windows forms
@@ -12,24 +13,21 @@ namespace Assessments {
 
 	public ref class UIForm : public System::Windows::Forms::Form {
 	public:
-		std::vector<int>* courses;	// Pointer to given vector to store course numbers
+		std::string* auth;		// Pointer to given string to store authorisation key
+		std::string* userName;	// Pointer to given string to store user name
 
-		UIForm(std::vector<int>* in) {	// Constructor
+		UIForm(std::string* authIn, std::string* userNameIn) {	// Constructor
 			InitializeComponent();
 
-			courses = in;	// Set courses pointer to given address
+			auth = authIn;			// Set auth pointer to given address
+			userName = userNameIn;	// Set userName pointer to given address
 		}
-
-		String^ getAuth() { return auth; }	// Return authorisation key
 
 	protected:
 		~UIForm() {	// Deconstructor
 			if (components)
 				delete components;
 		}
-
-		// Its here due to an auto code generation problem, move after finished
-		String^ auth = "";	// Contains authorisation key
 
 		// Auto generated code
 	private: System::Windows::Forms::Button^ enterBtn;
@@ -84,9 +82,8 @@ namespace Assessments {
 			this->authKey->MaximumSize = System::Drawing::Size(302, 55);
 			this->authKey->MinimumSize = System::Drawing::Size(302, 55);
 			this->authKey->Name = L"authKey";
-			this->authKey->ReadOnly = true;
 			this->authKey->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->authKey->Size = System::Drawing::Size(302, 55);
+			this->authKey->Size = System::Drawing::Size(302, 53);
 			this->authKey->TabIndex = 1;
 			// 
 			// label1

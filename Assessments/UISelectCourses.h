@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <string>
+#include <cliext/vector>
 
 namespace Assessments {
 	// Needed for windows forms
@@ -12,9 +14,13 @@ namespace Assessments {
 
 	public ref class UISelectCourses : public System::Windows::Forms::Form {
 	public:
-		UISelectCourses() {
-			InitializeComponent();
-		}
+		std::string* auth;				// Pointer to given string to store authorisation key
+		std::string* userName;			// Pointer to given string to store user name
+		std::vector<int>* courseNums;	// Pointer to given vector of ints to store course ids
+		cliext::vector<String^> courseNames;	// Vector of strings to store course names
+		cliext::vector<String^> courseTeachers;	// Vector of strings to store course teacher names
+
+		UISelectCourses(std::string* authIn, std::string* userNameIn, std::vector<int>* courseNumsIn);
 
 	protected:
 		~UISelectCourses() {
