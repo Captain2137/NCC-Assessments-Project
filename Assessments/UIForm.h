@@ -59,6 +59,7 @@ namespace Assessments {
 			this->enterBtn->AutoSize = true;
 			this->enterBtn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->enterBtn->ForeColor = System::Drawing::SystemColors::ControlText;
 			this->enterBtn->Location = System::Drawing::Point(611, 354);
 			this->enterBtn->Margin = System::Windows::Forms::Padding(2);
 			this->enterBtn->MaximumSize = System::Drawing::Size(140, 55);
