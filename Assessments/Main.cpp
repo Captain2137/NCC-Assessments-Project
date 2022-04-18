@@ -18,7 +18,6 @@
 #include "UIForm.h"
 #include "UISelectCourses.h"
 #include "VisualizationForm.h"
-#include "CommandLine.h"
 #include "CourseData.h"
 #include "Util.h"
 #include <string>
@@ -41,48 +40,43 @@ void debugPrint(const std::vector<int> courseNums, const std::string auth, std::
 
 [STAThread]
 
-int main(int argc, char* argv[]) {
-    if (argc <= 1) {
-        std::string userName;               // String holding users name
-        std::vector<int> courseNums;        // Vector array holding course numbers
-        std::vector<CourseData> courses;    // Vector array holding course data for each course
-        std::string auth;                   // String holding authorization key
+int main() {
+    std::string userName;               // String holding users name
+    std::vector<int> courseNums;        // Vector array holding course numbers
+    std::vector<CourseData> courses;    // Vector array holding course data for each course
+    std::string auth;                   // String holding authorization key
 
-        // Debug: Read in test CSV
-        if (readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv"))
-            return EXIT_FAILURE;
+    // Debug: Read in test CSV
+    if (readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv"))
+        return EXIT_FAILURE;
 
-        // Debug: Read in same test CSV for total.csv test
-        readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv");
+    // Debug: Read in same test CSV for total.csv test
+    readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv");
 
-        // Set Windows Form Styles
-        Application::EnableVisualStyles();
-        Application::SetCompatibleTextRenderingDefault(false);
+    // Set Windows Form Styles
+    Application::EnableVisualStyles();
+    Application::SetCompatibleTextRenderingDefault(false);
 
-        // Define UI form and send course numbers vector address
-        Assessments::UIForm ui(&auth, &userName);
-        Application::Run(% ui); // Run UI form
+    // Define UI form and send course numbers vector address
+    Assessments::UIForm ui(&auth, &userName);
+    Application::Run(% ui); // Run UI form
 
-        // Define select form and send course numbers vector address
-        Assessments::UISelectCourses select(&auth, &userName, &courseNums);
-        Application::Run(% select); // Run select form
+    // Define select form and send course numbers vector address
+    Assessments::UISelectCourses select(&auth, &userName, &courseNums);
+    Application::Run(% select); // Run select form
 
-        //getData(&courses, &courseNums);
+    //getData(&courses, &courseNums);
 
-        // Debug: Prints auth and course numbers to console with course data
-        debugPrint(courseNums, auth, &courses);
+    // Debug: Prints auth and course numbers to console with course data
+    debugPrint(courseNums, auth, &courses);
 
-        // Save data as .csv's
-        if (saveData(&courses))
-            return EXIT_FAILURE;
+    // Save data as .csv's
+    if (saveData(&courses))
+        return EXIT_FAILURE;
 
-        // Define Visualization form sending course data vector address
-        Assessments::VisualizationForm visualization(&courses);
-        Application::Run(% visualization);  // Run Visualization form
-    } else {
-        // If arguments given, then use command line
-        return Main::CommandLine(argc, argv);
-    }
+    // Define Visualization form sending course data vector address
+    Assessments::VisualizationForm visualization(&courses);
+    Application::Run(% visualization);  // Run Visualization form
 }
 
 // Read in data from CSV file
