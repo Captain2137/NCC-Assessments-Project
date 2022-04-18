@@ -84,9 +84,8 @@ namespace Assessments {
 			this->authKey->MaximumSize = System::Drawing::Size(302, 55);
 			this->authKey->MinimumSize = System::Drawing::Size(302, 55);
 			this->authKey->Name = L"authKey";
-			this->authKey->ReadOnly = true;
 			this->authKey->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->authKey->Size = System::Drawing::Size(302, 55);
+			this->authKey->Size = System::Drawing::Size(302, 53);
 			this->authKey->TabIndex = 1;
 			// 
 			// label1
