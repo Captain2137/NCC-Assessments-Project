@@ -77,7 +77,7 @@ namespace Assessments {
 			this->checkedListBox1->CheckOnClick = true;
 			this->checkedListBox1->FormattingEnabled = true;
 			this->checkedListBox1->Location = System::Drawing::Point(177, 402);
-			this->checkedListBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->checkedListBox1->Margin = System::Windows::Forms::Padding(4);
 			this->checkedListBox1->Name = L"checkedListBox1";
 			this->checkedListBox1->Size = System::Drawing::Size(805, 242);
 			this->checkedListBox1->TabIndex = 0;
@@ -87,7 +87,7 @@ namespace Assessments {
 			this->comboBox1->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Location = System::Drawing::Point(456, 236);
-			this->comboBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->comboBox1->Margin = System::Windows::Forms::Padding(4);
 			this->comboBox1->MaxLength = 100;
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(284, 24);
@@ -98,7 +98,7 @@ namespace Assessments {
 			this->comboBox2->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->comboBox2->FormattingEnabled = true;
 			this->comboBox2->Location = System::Drawing::Point(456, 270);
-			this->comboBox2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->comboBox2->Margin = System::Windows::Forms::Padding(4);
 			this->comboBox2->MaxLength = 100;
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(284, 24);
@@ -110,7 +110,7 @@ namespace Assessments {
 			this->textBox1->AcceptsTab = true;
 			this->textBox1->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->textBox1->Location = System::Drawing::Point(456, 303);
-			this->textBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->textBox1->Margin = System::Windows::Forms::Padding(4);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(284, 22);
 			this->textBox1->TabIndex = 4;
@@ -119,6 +119,7 @@ namespace Assessments {
 			// 
 			this->label1->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->label1->AutoSize = true;
+			this->label1->BackColor = System::Drawing::Color::White;
 			this->label1->ForeColor = System::Drawing::SystemColors::ControlText;
 			this->label1->Location = System::Drawing::Point(351, 240);
 			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
@@ -131,6 +132,7 @@ namespace Assessments {
 			// 
 			this->label2->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->label2->AutoSize = true;
+			this->label2->BackColor = System::Drawing::Color::White;
 			this->label2->Location = System::Drawing::Point(351, 273);
 			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
@@ -142,6 +144,7 @@ namespace Assessments {
 			// 
 			this->label3->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->label3->AutoSize = true;
+			this->label3->BackColor = System::Drawing::Color::White;
 			this->label3->Location = System::Drawing::Point(312, 306);
 			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label3->Name = L"label3";
@@ -153,6 +156,7 @@ namespace Assessments {
 			// 
 			this->label4->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->label4->AutoSize = true;
+			this->label4->BackColor = System::Drawing::Color::White;
 			this->label4->Location = System::Drawing::Point(174, 381);
 			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label4->Name = L"label4";
@@ -193,11 +197,13 @@ namespace Assessments {
 			this->button3->TabIndex = 11;
 			this->button3->Text = L"Search";
 			this->button3->UseVisualStyleBackColor = false;
+			this->button3->Click += gcnew System::EventHandler(this, &UISelectCourses::button3_Click);
 			// 
 			// UISelectCourses
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::Black;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(1175, 662);
@@ -224,5 +230,7 @@ namespace Assessments {
 		// Auto generated code by double clicking button in UIForm
 	private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
