@@ -18,10 +18,9 @@ namespace Assessments {
 		std::string* userName;			// Pointer to given string to store user name
 		std::vector<int>* courseNums;	// Pointer to given vector of ints to store course ids
 		cliext::vector<String^> courseNames;	// Vector of strings to store course names
-	private: System::Windows::Forms::Button^ button1;
+
 	public:
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button3;
+
 		   cliext::vector<String^> courseTeachers;	// Vector of strings to store course teacher names
 
 		UISelectCourses(std::string* authIn, std::string* userNameIn, std::vector<int>* courseNumsIn);
@@ -41,6 +40,9 @@ namespace Assessments {
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::ComboBox^ comboBox2;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ button3;
 	protected:
 
 	private:
