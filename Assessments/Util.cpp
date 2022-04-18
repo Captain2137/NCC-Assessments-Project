@@ -71,18 +71,12 @@ std::vector<std::vector<double>> util::calcData(std::vector<std::vector<int>> co
 
 	// For all comps in the vector
 	for (int i = 0; i < compSize; i++) {
-		// Calculate the average, median, percent above three, and standard deviation,
-		// for the current comp
-		double average = calcAvg(compData[i]);
-		double median = calcMedian(compData[i]);
-		double percentThree = calcPercent(compData[i]);
-		double deviation = calcDeviation(compData[i]);
 		// Add the average, median, percent above three, and standard deviation
 		// for the current comp to the vector of calculated data
-		calcedData[0].push_back(average);
-		calcedData[1].push_back(median);
-		calcedData[2].push_back(percentThree);
-		calcedData[3].push_back(deviation);
+		calcedData[0].push_back(calcAvg(compData[i]));
+		calcedData[1].push_back(calcMedian(compData[i]));
+		calcedData[2].push_back(calcPercent(compData[i]));
+		calcedData[3].push_back(calcDeviation(compData[i]));
 	}
 
 	// Return the calced data
