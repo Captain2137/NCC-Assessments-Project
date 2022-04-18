@@ -233,8 +233,9 @@ int getData(std::vector<CourseData>* courses, std::vector<int>* courseNums) {
     for (int i = 0; i < (int)courseNums->size(); i++) {
         courses->push_back(CourseData());
         courses->back().setCourseNum(courseNums->at(i));
-
     }
+    // Added to fix getData return error 
+    return 0;
 }
 
 // Save data into CSV files
