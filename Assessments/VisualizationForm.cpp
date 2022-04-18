@@ -8,13 +8,13 @@ Assessments::VisualizationForm::VisualizationForm(std::vector<CourseData>* in) {
 	for (int i = 0; i < (int)in->size(); i++) {
 
 		// Add course info and Competencies label
-		textBox1->Text += in->at(i).getYear() + " ";
-		textBox1->Text += msclr::interop::marshal_as<String^>(in->at(i).getSemester() + " ");
-		textBox1->Text += msclr::interop::marshal_as<String^>(in->at(i).getCode() + " ");
-		textBox1->Text += msclr::interop::marshal_as<String^>(in->at(i).getName() + " ");
-		textBox1->Text += msclr::interop::marshal_as<String^>(in->at(i).getSection() + " ");
-		textBox1->Text += msclr::interop::marshal_as<String^>(in->at(i).getProf() + " ");
-		textBox1->Text += in->at(i).getCourseNum() + ":\r\nCompetencies: ";
+		textBox1->Text += *in->at(i).getYear() + " ";
+		textBox1->Text += msclr::interop::marshal_as<String^>(*in->at(i).getSemester() + " ");
+		textBox1->Text += msclr::interop::marshal_as<String^>(*in->at(i).getCode() + " ");
+		textBox1->Text += msclr::interop::marshal_as<String^>(*in->at(i).getName() + " ");
+		textBox1->Text += msclr::interop::marshal_as<String^>(*in->at(i).getSection() + " ");
+		textBox1->Text += msclr::interop::marshal_as<String^>(*in->at(i).getProf() + " ");
+		textBox1->Text += *in->at(i).getCourseNum() + ":\r\nCompetencies: ";
 
 		// Loops through comps vector adding each to text box
 		for (int j = 0; j < (int)in->at(i).getComps()->size(); j++) {
@@ -23,9 +23,9 @@ Assessments::VisualizationForm::VisualizationForm(std::vector<CourseData>* in) {
 		textBox1->Text += "\r\n";	// Next line
 
 		// Loops through comps vector adding each to text box
-		for (int j = 0; j < (int)in->at(i).getData()->size(); j++) {
+		for (int j = 0; j < in->at(i).getData()->size(); j++) {
 			textBox1->Text += "Student " + (j + 1) + ": ";
-			for (int k = 0; k < (int)in->at(i).getData()->at(j).size(); k++) {
+			for (int k = 0; k < in->at(i).getData()->at(j).size(); k++) {
 				textBox1->Text += in->at(i).getData()->at(j).at(k) + " ";
 			}
 			textBox1->Text += "\r\n";	// Next line

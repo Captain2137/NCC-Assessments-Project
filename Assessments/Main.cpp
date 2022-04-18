@@ -43,6 +43,7 @@ void debugPrint(const std::vector<int> courseNums, const std::string auth, std::
 
 int main(int argc, char* argv[]) {
     if (argc <= 1) {
+        std::string userName;               // String holding users name
         std::vector<int> courseNums;        // Vector array holding course numbers
         std::vector<CourseData> courses;    // Vector array holding course data for each course
         std::string auth;                   // String holding authorization key
@@ -59,21 +60,14 @@ int main(int argc, char* argv[]) {
         Application::SetCompatibleTextRenderingDefault(false);
 
         // Define UI form and send course numbers vector address
-        Assessments::UIForm ui(&courseNums);
+        Assessments::UIForm ui(&auth, &userName);
         Application::Run(% ui); // Run UI form
 
-        // Get authorization key from ui and convert it from String^ to String
-        auth = msclr::interop::marshal_as<std::string>(ui.getAuth());
-
         // Define select form and send course numbers vector address
-        Assessments::UISelectCourses select;
+        Assessments::UISelectCourses select(&auth, &userName, &courseNums);
         Application::Run(% select); // Run select form
 
-        // Go through courses vector and create CourseData class for each
-        //for (int i = 0; i < (int)courseNums.size(); i++) {
-        //    courses.push_back(CourseData());
-        //    courses.back().setCourseNum(courseNums[i]);
-        //}
+        //getData(&courses, &courseNums);
 
         // Debug: Prints auth and course numbers to console with course data
         debugPrint(courseNums, auth, &courses);
@@ -234,20 +228,30 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
     return EXIT_SUCCESS;
 }
 
+int getData(std::vector<CourseData>* courses, std::vector<int>* courseNums) {
+    // Go through courses vector and create CourseData class for each
+    for (int i = 0; i < (int)courseNums->size(); i++) {
+        courses->push_back(CourseData());
+        courses->back().setCourseNum(courseNums->at(i));
+
+    }
+}
+
+// Save data into CSV files
 int saveData(std::vector<CourseData>* courses) {
     struct tm newtime;                          // To store time
-    char today[9];                              // MM-DD-YY
+    char today[9];                              // YY-MM-DD
     time_t now = time(0);                       // Get current time
     localtime_s(&newtime, &now);                // Set time in newtime
-    strftime(today, 9, "%m-%d-%y", &newtime);   // Format time to MM-DD-YY
+    strftime(today, 9, "%y-%m-%d", &newtime);   // Format time to YY-MM-DD
     std::string date = today;                   // Convert to string
 
     // Made new folder in root directory if does not exist
-    std::filesystem::create_directory(date);
+    std::filesystem::create_directories("CSVs/" + date);
 
     bool multi = courses->size() > 1;           // Flag if multiple courses
     std::vector<std::vector<int>> totalData;    // 2D vector to store total data
-    remove((date + "/Total.csv").c_str());      // Delete old file if exists
+    remove(("CSVs/" + date + "/Aggregate.csv").c_str());  // Delete old file if exists
     std::string fileName;                       // To store file name
     
     try {
@@ -255,24 +259,24 @@ int saveData(std::vector<CourseData>* courses) {
         for (int i = 0; i < (int)courses->size(); i++) {
             // Create and open file following format in folder named after the date:
             // YEAR-SEMESTER-CODE-ID-SECTION-INSTRUCTOR.csv
-            fileName = date + "/"
-                + msclr::interop::marshal_as<std::string>(courses->at(i).getYear().ToString())
-                + "-" + courses->at(i).getSemester() + "-" + courses->at(i).getCode() + "-"
-                + msclr::interop::marshal_as<std::string>(courses->at(i).getCourseNum().ToString())
-                + "-" + courses->at(i).getSection() + "-" + courses->at(i).getProf() + ".csv";
+            fileName = "CSVs/" + date + "/"
+                + msclr::interop::marshal_as<std::string>((*courses->at(i).getYear()).ToString())
+                + "-" + *courses->at(i).getSemester() + "-" + *courses->at(i).getCode() + "-"
+                + msclr::interop::marshal_as<std::string>((*courses->at(i).getCourseNum()).ToString())
+                + "-" + *courses->at(i).getSection() + "-" + *courses->at(i).getProf() + ".csv";
             std::ofstream outFile(fileName);
 
             // Throws errors if writing of file failed
             outFile.exceptions(std::ifstream::badbit | std::ifstream::failbit | std::ifstream::goodbit);
 
             // Save course year, semester, code, name, section, professor's name, and course number to file
-            outFile << courses->at(i).getYear() << ",";
-            outFile << courses->at(i).getSemester() << ",";
-            outFile << courses->at(i).getCode() << ",";
-            outFile << courses->at(i).getName() << ",";
-            outFile << courses->at(i).getSection() << ",";
-            outFile << courses->at(i).getProf() << ",";
-            outFile << courses->at(i).getCourseNum() << "," << std::endl;
+            outFile << *courses->at(i).getYear() << ",";
+            outFile << *courses->at(i).getSemester() << ",";
+            outFile << *courses->at(i).getCode() << ",";
+            outFile << *courses->at(i).getName() << ",";
+            outFile << *courses->at(i).getSection() << ",";
+            outFile << *courses->at(i).getProf() << ",";
+            outFile << *courses->at(i).getCourseNum() << "," << std::endl;
 
             // Save comps contents to file
             outFile << "Students,";
@@ -318,21 +322,21 @@ int saveData(std::vector<CourseData>* courses) {
             outFile.close();
 
             if (multi) {    // If multiple courses, print all courses to total.csv
-                // Create and open file total.csv 
-                fileName = date + "/Total.csv";
+                // Create and open file Aggregate.csv 
+                fileName = "CSVs/" + date + "/Aggregate.csv";
                 std::ofstream outFile(fileName, std::ios_base::app);
 
                 // Throws errors if writing of file failed
                 outFile.exceptions(std::ifstream::badbit | std::ifstream::failbit | std::ifstream::goodbit);
 
                 // Save course year, semester, code, name, section, professor's name, and course number to file
-                outFile << courses->at(i).getYear() << ",";
-                outFile << courses->at(i).getSemester() << ",";
-                outFile << courses->at(i).getCode() << ",";
-                outFile << courses->at(i).getName() << ",";
-                outFile << courses->at(i).getSection() << ",";
-                outFile << courses->at(i).getProf() << ",";
-                outFile << courses->at(i).getCourseNum() << "," << std::endl;
+                outFile << *courses->at(i).getYear() << ",";
+                outFile << *courses->at(i).getSemester() << ",";
+                outFile << *courses->at(i).getCode() << ",";
+                outFile << *courses->at(i).getName() << ",";
+                outFile << *courses->at(i).getSection() << ",";
+                outFile << *courses->at(i).getProf() << ",";
+                outFile << *courses->at(i).getCourseNum() << "," << std::endl;
 
                 // Save comps contents to file
                 outFile << "Students,";
@@ -382,44 +386,51 @@ int saveData(std::vector<CourseData>* courses) {
             }
         }
 
-        if (multi) {// If multiple courses, print totals to total.csv
-            // Open file total.csv
-            fileName = date + "/Total.csv";
+        if (multi) {    // If multiple courses, print totals to total.csv
+            // Open file Aggregate.csv
+            fileName = "CSVs/" + date + "/Aggregate.csv";
             std::ofstream outFile(fileName, std::ios_base::app);
 
             // Throws errors if writing of file failed
             outFile.exceptions(std::ifstream::badbit | std::ifstream::failbit | std::ifstream::goodbit);
 
+            // The 2D vector of the average, median, percent above three, and standard deviation
+            std::vector<std::vector<double>> calcedData = util::calcData(totalData);
+
             // Save total average contents to file
-            outFile << "Total average,";
-            for (int i = 0; i < totalData.at(i).size(); i++) {
-                outFile << util::calcAvg(totalData.at(i)) << ",";
+            outFile << "Aggregate Average,";
+            for (int i = 0; i < (int)calcedData[0].size(); i++) {
+                outFile << calcedData.at(0).at(i) << ",";
             }
+            std::cout << std::endl;
 
             // Save total median contents to file
-            outFile << "\nTotal median,";
-            for (int i = 0; i < totalData.at(i).size(); i++) {
-                outFile << util::calcMedian(totalData.at(i)) << ",";
+            outFile << "\nAggregate Median,";
+            for (int i = 0; i < (int)calcedData[0].size(); i++) {
+                outFile << calcedData.at(1).at(i) << ",";
             }
+            std::cout << std::endl;
 
             // Save total percent contents to file
-            outFile << "\nTotal percent,";
-            for (int i = 0; i < totalData.at(i).size(); i++) {
-                outFile << util::calcPercent(totalData.at(i)) << ",";
+            outFile << "\nAggregate Percent,";
+            for (int i = 0; i < (int)calcedData[0].size(); i++) {
+                outFile << calcedData.at(2).at(i) << ",";
             }
+            std::cout << std::endl;
 
             // Save total deviation contents to file
-            outFile << "\nTotal deviation,";
-            for (int i = 0; i < totalData.at(i).size(); i++) {
-                outFile << util::calcDeviation(totalData.at(i)) << ",";
+            outFile << "\nAggregate Deviation,";
+            for (int i = 0; i < (int)calcedData[0].size(); i++) {
+                outFile << calcedData.at(3).at(i) << ",";
             }
+            std::cout << std::endl;
 
             // Close file when done
             outFile.close();
         }
     } catch (const std::ios_base::failure& e) {
         // If error happends while opeing file
-        std::cout << "Error: " << e.what() << ", reading of file \"" << fileName << "\" failed\n\n";
+        std::cout << "Error: " << e.what() << ", writing of file \"" << fileName << "\" failed\n\n";
         return EXIT_FAILURE;
     } catch (const std::exception& e) {
         // If another error happends
@@ -449,13 +460,13 @@ void debugPrint(const std::vector<int> courseNums, const std::string auth, std::
 
     // Go through course data vector and print contents to console
     for (int i = 0; i < (int)courses->size(); i++) {
-        std::cout << courses->at(i).getYear() << ",";
-        std::cout << courses->at(i).getSemester() << ",";
-        std::cout << courses->at(i).getCode() << ",";
-        std::cout << courses->at(i).getName() << ",";
-        std::cout << courses->at(i).getSection() << ",";
-        std::cout << courses->at(i).getProf() << ",";
-        std::cout << courses->at(i).getCourseNum() << std::endl;
+        std::cout << *courses->at(i).getYear() << ",";
+        std::cout << *courses->at(i).getSemester() << ",";
+        std::cout << *courses->at(i).getCode() << ",";
+        std::cout << *courses->at(i).getName() << ",";
+        std::cout << *courses->at(i).getSection() << ",";
+        std::cout << *courses->at(i).getProf() << ",";
+        std::cout << *courses->at(i).getCourseNum() << std::endl;
 
         // Print comps contents to console
         std::cout << "Students,";
