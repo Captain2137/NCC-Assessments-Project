@@ -50,13 +50,11 @@ int main() {
     if (readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv"))
         return EXIT_FAILURE;
 
-<<<<<<< HEAD
         // Debug: Read in same test CSV for total.csv test
         readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat-1.csv");
-=======
+
     // Debug: Read in same test CSV for total.csv test
     readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv");
->>>>>>> f440f4c149686f000815e2682bf3151b85b255af
 
     // Set Windows Form Styles
     Application::EnableVisualStyles();
@@ -233,10 +231,7 @@ int getData(std::vector<CourseData>* courses, std::vector<int>* courseNums) {
         courses->push_back(CourseData());
         courses->back().setCourseNum(courseNums->at(i));
     }
-<<<<<<< HEAD
-=======
-    // Added to fix getData return error 
->>>>>>> f440f4c149686f000815e2682bf3151b85b255af
+
     return 0;
 }
 
