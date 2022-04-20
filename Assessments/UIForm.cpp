@@ -9,7 +9,7 @@ using namespace util;
 System::Void Assessments::UIForm::enterBtn_Click(System::Object^ sender, System::EventArgs^ e) {
 	// Set auth as what user put in textBox1
 	if (authKey->Text == "") {
-		MessageBox::Show(L"Error! Please enter a valid key. No key was entered."); // Message Box Alerting the User that Nothing was Inputted.
+		MessageBox::Show(L"Error: No Canvas Key was Entered. The Application will now Exit."); // Message Box Alerting the User that Nothing was Inputted.
 		Application::Exit();
 	}
 
@@ -24,7 +24,7 @@ System::Void Assessments::UIForm::enterBtn_Click(System::Object^ sender, System:
 
 	if (j.contains("errors")) {	// If error, print error message(s), exits program
 		std::cout << "Error: " << j["errors"][0]["message"].get<std::string>() << std::endl << std::endl;
-		MessageBox::Show(L"Error! Please input a valid key.");	// Message Box Alerting the User that an Incorrect API was Inputted.
+		MessageBox::Show(L"Error: The Canvas Key Inputted is Incorrect.");	// Message Box Alerting the User that an Incorrect API was Inputted.
 		Application::Exit();
 	}
 	else {	// If success, get user's name
