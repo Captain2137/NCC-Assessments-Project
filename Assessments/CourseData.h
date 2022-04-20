@@ -2,8 +2,6 @@
 #include <string>
 #include <vector>
 
-// this is a comet
-
 // Holds all the data for a course
 class CourseData {
 public:
