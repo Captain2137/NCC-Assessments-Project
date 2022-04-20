@@ -3,11 +3,19 @@
 #include <iostream>
 #include <msclr/marshal_cppstd.h>   // Needed to convert String^ to String
 #include <nlohmann/json.hpp>    // Needed to read data fetched from online servers
+#include <Windows.h>
 
 using namespace util;
 
 // On enter button click, get authorization key from authKey, and exit form
 System::Void Assessments::UIForm::enterBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+	// Checks if the user inputs nothing, the application exits
+	if (authKey->Text == "") {
+		Application::Exit();
+		//System::Windows::Forms::MessageBox("Group");
+		
+	}
+
 	// Set auth as what user put in textBox1
 	*auth = msclr::interop::marshal_as<std::string>(authKey->Text);
 
