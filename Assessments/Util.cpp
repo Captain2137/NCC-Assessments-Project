@@ -37,8 +37,7 @@ std::string util::curlRequest(std::string url) {
 		std::cout << "HTTP Code: " << httpCode << ", Curl result: " << curl_easy_strerror(res) << std::endl;
 
 		return readBuffer;
-	}
-	else {    // If initialisation failed
+	} else {    // If initialisation failed
 		std::cout << "Error: Curl initialisation failed\n\n";
 		return "";
 	}
