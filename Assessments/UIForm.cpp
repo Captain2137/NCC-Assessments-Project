@@ -10,7 +10,6 @@ System::Void Assessments::UIForm::enterBtn_Click(System::Object^ sender, System:
 	// Checks if the user inputs nothing, the application exits
 	if (authKey->Text == "") {
 		Application::Exit();
-		//System::Windows::Forms::MessageBox("Group");
 		
 	}
 
