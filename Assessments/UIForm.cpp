@@ -3,8 +3,6 @@
 #include <iostream>
 #include <msclr/marshal_cppstd.h>   // Needed to convert String^ to String
 #include <nlohmann/json.hpp>    // Needed to read data fetched from online servers
-#include <Windows.h>
-
 using namespace util;
 
 // On enter button click, get authorization key from authKey, and exit form
@@ -18,24 +16,26 @@ System::Void Assessments::UIForm::enterBtn_Click(System::Object^ sender, System:
 
 	// Set auth as what user put in textBox1
 	if (authKey->Text == "") {
+		MessageBox::Show(L"Error! Please enter a valid key. No key was entered.");
 		Application::Exit();
 	}
-	else {
-		*auth = msclr::interop::marshal_as<std::string>(authKey->Text);
 
-		// Get data from online server
-		nlohmann::json j = nlohmann::json::parse(util::curlRequest("https://canvas.nashuaweb.net/api/v1/users/self?access_token=" + *auth));
-		// Change canvas.nashuaweb.net to canvas-prod.ccsnh.edu in final
+	*auth = msclr::interop::marshal_as<std::string>(authKey->Text);
 
-		// Debug: Print raw json with formating
-		std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;
+	// Get data from online server
+	nlohmann::json j = nlohmann::json::parse(util::curlRequest("https://canvas.nashuaweb.net/api/v1/users/self?access_token=" + *auth));
+	// Change canvas.nashuaweb.net to canvas-prod.ccsnh.edu in final
 
-		if (j.contains("errors")) {	// If error, print error message(s)
-			std::cout << "Error: " << j["errors"][0]["message"].get<std::string>() << std::endl << std::endl;
-		}
-		else {	// If success, get user's name
-			*userName = j["name"];
-		}
+	// Debug: Print raw json with formating
+	std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;
+
+	if (j.contains("errors")) {	// If error, print error message(s), exits program
+		std::cout << "Error: " << j["errors"][0]["message"].get<std::string>() << std::endl << std::endl;
+		MessageBox::Show(L"Error! Please input a valid key.");
+		Application::Exit();
+	}
+	else {	// If success, get user's name
+		*userName = j["name"];
 	}
 
 	// Close form
