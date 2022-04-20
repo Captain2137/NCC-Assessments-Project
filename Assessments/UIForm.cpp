@@ -7,15 +7,9 @@ using namespace util;
 
 // On enter button click, get authorization key from authKey, and exit form
 System::Void Assessments::UIForm::enterBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-	// Checks if the user inputs nothing, the application exits
-	if (authKey->Text == "") {
-		Application::Exit();
-		
-	}
-
 	// Set auth as what user put in textBox1
 	if (authKey->Text == "") {
-		MessageBox::Show(L"Error! Please enter a valid key. No key was entered.");
+		MessageBox::Show(L"Error! Please enter a valid key. No key was entered."); // Message Box Alerting the User that Nothing was Inputted.
 		Application::Exit();
 	}
 
@@ -30,7 +24,7 @@ System::Void Assessments::UIForm::enterBtn_Click(System::Object^ sender, System:
 
 	if (j.contains("errors")) {	// If error, print error message(s), exits program
 		std::cout << "Error: " << j["errors"][0]["message"].get<std::string>() << std::endl << std::endl;
-		MessageBox::Show(L"Error! Please input a valid key.");
+		MessageBox::Show(L"Error! Please input a valid key.");	// Message Box Alerting the User that an Incorrect API was Inputted.
 		Application::Exit();
 	}
 	else {	// If success, get user's name
