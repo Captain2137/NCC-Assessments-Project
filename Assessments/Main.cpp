@@ -231,7 +231,6 @@ int getData(std::vector<CourseData>* courses, std::vector<int>* courseNums) {
         courses->push_back(CourseData());
         courses->back().setCourseNum(courseNums->at(i));
     }
-
     return 0;
 }
 
