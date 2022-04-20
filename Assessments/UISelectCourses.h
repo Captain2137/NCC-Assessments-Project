@@ -92,6 +92,7 @@ namespace Assessments {
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(284, 24);
 			this->comboBox1->TabIndex = 2;
+			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &UISelectCourses::comboBox1_SelectedIndexChanged);
 			// 
 			// comboBox2
 			// 
@@ -231,6 +232,8 @@ namespace Assessments {
 	private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

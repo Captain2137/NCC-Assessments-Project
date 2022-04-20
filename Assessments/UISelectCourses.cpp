@@ -29,3 +29,8 @@ Assessments::UISelectCourses::UISelectCourses(std::string* authIn, std::string* 
 
 	InitializeComponent();
 }
+
+System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	std::cout << "Test" << std::endl;
+
+}
