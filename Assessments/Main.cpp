@@ -50,9 +50,6 @@ int main() {
     if (readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv"))
         return EXIT_FAILURE;
 
-        // Debug: Read in same test CSV for total.csv test
-        readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat-1.csv");
-
     // Debug: Read in same test CSV for total.csv test
     readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv");
 
