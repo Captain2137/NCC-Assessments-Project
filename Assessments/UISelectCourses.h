@@ -81,10 +81,12 @@ namespace Assessments {
 			this->checkedListBox1->Name = L"checkedListBox1";
 			this->checkedListBox1->Size = System::Drawing::Size(805, 242);
 			this->checkedListBox1->TabIndex = 0;
+			this->checkedListBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &UISelectCourses::checkedListBox1_SelectedIndexChanged);
 			// 
 			// comboBox1
 			// 
 			this->comboBox1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->comboBox1->DataSource = this->checkedListBox1->CustomTabOffsets;
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Location = System::Drawing::Point(456, 236);
 			this->comboBox1->Margin = System::Windows::Forms::Padding(4);
@@ -219,9 +221,10 @@ namespace Assessments {
 			this->Controls->Add(this->comboBox2);
 			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->checkedListBox1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Name = L"UISelectCourses";
-			this->Text = L"UISelectCourses";
+			this->Text = L"Course Selection";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -230,10 +233,15 @@ namespace Assessments {
 
 		// Auto generated code by double clicking button in UIForm
 	private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+		std::string test = "test";
 	}
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	std::string test = "test";
+}
+private: System::Void checkedListBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	std::string test = "test";
 }
 };
 }

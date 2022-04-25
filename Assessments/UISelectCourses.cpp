@@ -13,6 +13,8 @@ Assessments::UISelectCourses::UISelectCourses(std::string* authIn, std::string* 
 	nlohmann::json j = nlohmann::json::parse(util::curlRequest("https://canvas.nashuaweb.net/api/v1/accounts/self/courses?per_page=100&include[]=teachers&access_token=" + *auth));
 	// Change canvas.nashuaweb.net to canvas-prod.ccsnh.edu in final
 
+	
+
 	// Debug: Print raw json with formating
 	std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;
 
