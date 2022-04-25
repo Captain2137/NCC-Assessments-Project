@@ -4,11 +4,6 @@
 #include <algorithm>
 #include <cmath>
 
-double calcAvg(std::vector<int> scores);		// Calculates the average of a vector of doubles
-double calcMedian(std::vector<int> scores);		// Calculates the median of a vector of doubles
-double calcPercent(std::vector<int> scores);    // Calculates the percent above three of a vector of doubles
-double calcDeviation(std::vector<int> scores);  // Calculates the standard deviation of a vector of doubles
-
 // Saves data fetched by curl
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
 	((std::string*)userp)->append((char*)contents, size * nmemb);
