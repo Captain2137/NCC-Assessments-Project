@@ -50,7 +50,7 @@ std::string util::curlRequest(std::string url) {
 
 // Calculates the averages, medians, percents above three, and 
 // standard devations in each competency given a 2D vector of courses data
-std::vector<std::vector<double>> util::calcData(std::vector<std::vector<int>> courseData) {
+std::vector<std::vector<double>> util::calcData(std::vector<std::vector<double>> courseData) {
 	
 	/*
 	// The number of competencies in the courses
@@ -78,7 +78,7 @@ std::vector<std::vector<double>> util::calcData(std::vector<std::vector<int>> co
 	}
 
 	// 2D vector to hold the data from all classes for each comp
-	std::vector<std::vector<int>> compData(largestCompSize, std::vector<int>(0));
+	std::vector<std::vector<double>> compData(largestCompSize, std::vector<double>(0));
 
 	// For all students in the course
 	for (int i = 0; i < classSize; i++) {
@@ -148,7 +148,7 @@ std::vector<std::vector<double>> util::calcData(std::vector<std::vector<int>> co
 		// If the number of scores is even
 		if (middle % 2 == 0) {
 			// Calculate the median score and add to the vector
-			calcedData[1].push_back((compData[i][middle] + compData[i][middle - 1]) / 2.0);
+			calcedData[1].push_back((compData[i][middle] + compData[i][middle - 1]) / 2);
 		}
 
 		// If the number of scores is odd

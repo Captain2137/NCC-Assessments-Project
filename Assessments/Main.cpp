@@ -24,6 +24,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 #include <ctime>        // Needed to get the date
 #include <filesystem>   // Needed to make dir
 #include <sstream>      // Needed for stringstream
@@ -35,6 +36,7 @@ using namespace System;
 using namespace System::Windows::Forms;
 
 int readCSV(std::vector<CourseData>* courses, std::string fileName);    // Read in data from CSV file
+void getData(std::vector<CourseData>* courses, std::vector<int>* courseNums, std::string* auth);
 int saveData(std::vector<CourseData>* courses); // Save data as .csv files
 void debugPrint(const std::vector<int> courseNums, const std::string auth, std::vector<CourseData>* courses); // Debug test to print data to console
 
@@ -65,7 +67,7 @@ int main() {
     Assessments::UISelectCourses select(&auth, &userName, &courseNums);
     Application::Run(% select); // Run select form
 
-    //getData(&courses, &courseNums);
+    getData(&courses, &courseNums, &auth);
 
     // Debug: Prints auth and course numbers to console with course data
     debugPrint(courseNums, auth, &courses);
@@ -88,7 +90,7 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
         file.exceptions(std::ifstream::badbit | std::ifstream::failbit | std::ifstream::goodbit);
 
         CourseData course;          // Create course data to store data
-        std::vector<int> row;       // Temp to hold row for 2D vector
+        std::vector<double> row;       // Temp to hold row for 2D vector
         std::string line, text;     // Current line and substring in line
 
         getline(file, line);            // Get first line from file
@@ -139,7 +141,7 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
 
             // Get the rest of the substrings in line and save them in data
             while (std::getline(str, text, ',')) {  // Keeps looping till end of string
-                row.push_back(std::stoi(text));     // Add data to row temporarily
+                row.push_back(std::stod(text));     // Add data to row temporarily
             }
             course.addData(row);    // Add row to data
 
@@ -222,14 +224,64 @@ int readCSV(std::vector<CourseData>* courses, std::string fileName) {
     return EXIT_SUCCESS;
 }
 
-int getData(std::vector<CourseData>* courses, std::vector<int>* courseNums) {
+void getData(std::vector<CourseData>* courses, std::vector<int>* courseNums, std::string* auth) {
     // Go through courses vector and create CourseData class for each
     for (int i = 0; i < (int)courseNums->size(); i++) {
-        courses->push_back(CourseData());
-        courses->back().setCourseNum(courseNums->at(i));
-    }
+        std::vector<double> row;       // Temp to hold row for 2D vector
 
-    return 0;
+        // Get data from online server
+        nlohmann::json j = nlohmann::json::parse(util::curlRequest("https://canvas.nashuaweb.net//api/v1/courses/"
+            + msclr::interop::marshal_as<std::string>(courseNums->at(i).ToString())
+            + "?include[]=term&include[]=sections&include[]=teachers&access_token=" + *auth));
+        // Change canvas.nashuaweb.net to canvas-prod.ccsnh.edu in final
+
+        // Debug: Print raw json with formating
+        std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;
+
+        if (j.contains("errors")) {	// If error, print error message(s)
+            std::cout << "Error: " << j["errors"][0]["message"].get<std::string>() << std::endl << std::endl;
+        } else {	// If success, 
+            courses->push_back(CourseData());
+            courses->back().setCourseNum(courseNums->at(i));
+            courses->back().setCode(j["course_code"]);
+            courses->back().setName(j["name"]);
+            courses->back().setProf(j["teachers"][0]["display_name"]);
+            courses->back().setSemester(j["term"]["name"]);
+            courses->back().setYear(std::stoi(j["term"]["start_at"].get<std::string>().substr(0, 4)));
+            courses->back().setSection("");
+
+            // Get data from online server
+            nlohmann::json j = nlohmann::json::parse(util::curlRequest("https://canvas.nashuaweb.net/api/v1/courses/"
+                + msclr::interop::marshal_as<std::string>(courseNums->at(i).ToString())
+                + "/outcome_rollups?include[]=outcomes&include[]=users&include[]=outcome_paths&access_token=" + *auth));
+            // Change canvas.nashuaweb.net to canvas-prod.ccsnh.edu in final
+
+            // Debug: Print raw json with formating
+            std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;
+
+            if (j.contains("errors")) {	// If error, print error message(s)
+                std::cout << "Error: " << j["errors"][0]["message"].get<std::string>() << std::endl << std::endl;
+            } else {	// If success, 
+                for (int k = 0; k < j["linked"]["outcome_paths"].size(); k++) {
+                    courses->back().addComps(j["linked"]["outcome_paths"][k]["parts"][0]["name"]);
+                }
+
+                for (int k = 0; k < j["linked"]["outcomes"].size(); k++) {
+                    courses->back().addMastery(j["linked"]["outcomes"][k]["mastery_points"]);
+                }
+
+                for (int k = 0; k < j["rollups"].size(); k++) {
+                    row.clear();
+                    for (int l = 0; l < j["rollups"][k]["scores"].size(); l++) {
+                        row.push_back(j["rollups"][k]["scores"][l]["score"]);
+                    }
+                    courses->back().addData(row);
+                }
+
+                courses->back().calculate();
+            }
+        }
+    }
 }
 
 // Save data into CSV files
@@ -245,7 +297,7 @@ int saveData(std::vector<CourseData>* courses) {
     std::filesystem::create_directories("CSVs/" + date);
 
     bool multi = courses->size() > 1;           // Flag if multiple courses
-    std::vector<std::vector<int>> totalData;    // 2D vector to store total data
+    std::vector<std::vector<double>> totalData;    // 2D vector to store total data
     remove(("CSVs/" + date + "/Aggregate.csv").c_str());  // Delete old file if exists
     std::string fileName;                       // To store file name
     
@@ -259,6 +311,7 @@ int saveData(std::vector<CourseData>* courses) {
                 + "-" + *courses->at(i).getSemester() + "-" + *courses->at(i).getCode() + "-"
                 + msclr::interop::marshal_as<std::string>((*courses->at(i).getCourseNum()).ToString())
                 + "-" + *courses->at(i).getSection() + "-" + *courses->at(i).getProf() + ".csv";
+            fileName.erase(std::remove(fileName.begin(), fileName.end(), ':'), fileName.end());
             std::ofstream outFile(fileName);
 
             // Throws errors if writing of file failed
