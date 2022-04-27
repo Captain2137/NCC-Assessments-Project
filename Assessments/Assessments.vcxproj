@@ -83,7 +83,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>libcurl.dll.a;..\lib32\chartdir70.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -92,6 +92,7 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>..\Vinclude</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libcurl.dll.a;..\lib32\chartdir70.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -126,6 +127,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CourseData.h" />
+    <ClInclude Include="graphing\ChartViewer.h" />
+    <ClInclude Include="graphing\CompAverage.h" />
+    <ClInclude Include="graphing\CompScore.h" />
+    <ClInclude Include="graphing\mfccharts.h" />
+    <ClInclude Include="graphing\mfcdemo.h" />
+    <ClInclude Include="graphing\mfcdemoDlg.h" />
+    <ClInclude Include="graphing\resource.h" />
+    <ClInclude Include="graphing\SectionAverage.h" />
+    <ClInclude Include="graphing\stdafx.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="UIForm.h">
       <FileType>CppForm</FileType>
@@ -174,6 +184,9 @@
     <Image Include="res\zoomchart.ico" />
     <Image Include="res\zoomInPB.ico" />
     <Image Include="res\zoomOutPB.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="graphing\mfcdemo.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
