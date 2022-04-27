@@ -157,6 +157,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv" />
+    <None Include="res\mfcdemo.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\barchart.ico" />
+    <Image Include="res\bubblechart.ico" />
+    <Image Include="res\mfcdemo.ico" />
+    <Image Include="res\pointerPB.ico" />
+    <Image Include="res\robot1.png" />
+    <Image Include="res\robot2.png" />
+    <Image Include="res\robot3.png" />
+    <Image Include="res\robot4.png" />
+    <Image Include="res\robot5.png" />
+    <Image Include="res\savePB.ico" />
+    <Image Include="res\xychart.ico" />
+    <Image Include="res\zoomchart.ico" />
+    <Image Include="res\zoomInPB.ico" />
+    <Image Include="res\zoomOutPB.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

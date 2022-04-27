@@ -55,5 +55,52 @@
     <None Include="2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\mfcdemo.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\barchart.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bubblechart.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\mfcdemo.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\pointerPB.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\robot1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\robot2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\robot3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\robot4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\robot5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\savePB.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\xychart.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\zoomchart.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\zoomInPB.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\zoomOutPB.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
