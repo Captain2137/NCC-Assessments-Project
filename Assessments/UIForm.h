@@ -32,7 +32,7 @@ namespace Assessments {
 		// Auto generated code
 	private: System::Windows::Forms::Button^ enterBtn;
 	private: System::Windows::Forms::TextBox^ authKey;
-	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ canvasTokenLabel;
 	protected:
 
 	private:
@@ -50,7 +50,7 @@ namespace Assessments {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(UIForm::typeid));
 			this->enterBtn = (gcnew System::Windows::Forms::Button());
 			this->authKey = (gcnew System::Windows::Forms::TextBox());
-			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->canvasTokenLabel = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// enterBtn
@@ -58,14 +58,14 @@ namespace Assessments {
 			this->enterBtn->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
 			this->enterBtn->AutoSize = true;
 			this->enterBtn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
+			static_cast<System::Byte>(0)));
 			this->enterBtn->ForeColor = System::Drawing::SystemColors::ControlText;
-			this->enterBtn->Location = System::Drawing::Point(611, 354);
+			this->enterBtn->Location = System::Drawing::Point(489, 283);
 			this->enterBtn->Margin = System::Windows::Forms::Padding(2);
-			this->enterBtn->MaximumSize = System::Drawing::Size(140, 55);
-			this->enterBtn->MinimumSize = System::Drawing::Size(140, 55);
+			this->enterBtn->MaximumSize = System::Drawing::Size(112, 44);
+			this->enterBtn->MinimumSize = System::Drawing::Size(112, 44);
 			this->enterBtn->Name = L"enterBtn";
-			this->enterBtn->Size = System::Drawing::Size(140, 55);
+			this->enterBtn->Size = System::Drawing::Size(112, 44);
 			this->enterBtn->TabIndex = 0;
 			this->enterBtn->Text = L"Enter";
 			this->enterBtn->UseVisualStyleBackColor = true;
@@ -78,44 +78,45 @@ namespace Assessments {
 			this->authKey->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
 			this->authKey->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24));
 			this->authKey->ForeColor = System::Drawing::Color::Black;
-			this->authKey->Location = System::Drawing::Point(304, 354);
+			this->authKey->Location = System::Drawing::Point(243, 283);
 			this->authKey->Margin = System::Windows::Forms::Padding(2);
-			this->authKey->MaximumSize = System::Drawing::Size(302, 55);
-			this->authKey->MinimumSize = System::Drawing::Size(302, 55);
+			this->authKey->MaximumSize = System::Drawing::Size(242, 55);
+			this->authKey->MinimumSize = System::Drawing::Size(242, 55);
 			this->authKey->Name = L"authKey";
 			this->authKey->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->authKey->Size = System::Drawing::Size(302, 53);
+			this->authKey->Size = System::Drawing::Size(242, 44);
 			this->authKey->TabIndex = 1;
 			// 
-			// label1
+			// Canvas Token Label 
 			// 
-			this->label1->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(76, 355);
-			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
-			this->label1->MaximumSize = System::Drawing::Size(216, 55);
-			this->label1->MinimumSize = System::Drawing::Size(140, 55);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(214, 55);
-			this->label1->TabIndex = 2;
-			this->label1->Text = L"Canvas Token:";
-			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->canvasTokenLabel->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
+			this->canvasTokenLabel->AutoSize = true;
+			this->canvasTokenLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			static_cast<System::Byte>(0)));
+			this->canvasTokenLabel->Location = System::Drawing::Point(61, 284);
+			this->canvasTokenLabel->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->canvasTokenLabel->MaximumSize = System::Drawing::Size(173, 44);
+			this->canvasTokenLabel->MinimumSize = System::Drawing::Size(112, 44);
+			this->canvasTokenLabel->Name = L"canvasTokenLabel";
+			this->canvasTokenLabel->Size = System::Drawing::Size(173, 44);
+			this->canvasTokenLabel->TabIndex = 2;
+			this->canvasTokenLabel->Text = L"Canvas Token:";
+			this->canvasTokenLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->canvasTokenLabel->Click += gcnew System::EventHandler(this, &UIForm::canvasTokenLabel_Click);
 			// 
 			// UIForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(120, 120);
+			this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 			this->BackColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(846, 464);
-			this->Controls->Add(this->label1);
+			this->ClientSize = System::Drawing::Size(677, 371);
+			this->Controls->Add(this->canvasTokenLabel);
 			this->Controls->Add(this->authKey);
 			this->Controls->Add(this->enterBtn);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
+			static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(2);
@@ -127,8 +128,10 @@ namespace Assessments {
 		}
 #pragma endregion
 
-		// Auto generated code by double clicking button in UIForm
-	private: System::Void enterBtn_Click(System::Object^ sender, System::EventArgs^ e);
+// Auto generated code by double clicking button in UIForm
+private: System::Void enterBtn_Click(System::Object^ sender, System::EventArgs^ e);
 
+private: System::Void canvasTokenLabel_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
