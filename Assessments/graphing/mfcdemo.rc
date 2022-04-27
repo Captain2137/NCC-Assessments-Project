@@ -1,0 +1,285 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\mfcdemo.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""     // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\mfcdemo.ico"
+
+IDI_ZoomOutPB           ICON                    "res\\zoomOutPB.ico" 
+
+IDI_ZoomInPB            ICON                    "res\\zoomInPB.ico" 
+
+IDI_SavePB              ICON                    "res\\savePB.ico" 
+
+IDI_PointerPB           ICON                    "res\\pointerPB.ico" 
+
+BARCHART.ICO            ICON                    "res\\barchart.ico" 
+
+BUBBLECHART.ICO         ICON                    "res\\bubblechart.ico" 
+
+ZOOMCHART.ICO           ICON                    "res\\zoomchart.ico"
+
+XYCHART.ICO             ICON                    "res\\xychart.ico" 
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MFCDEMO_DIALOG DIALOGEX 0, 0, 150, 100
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Graph Viewer"
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_CHARTVIEWER0,"Static",SS_BITMAP,154,9,15,13
+    CONTROL         "",IDC_CHARTVIEWER1,"Static",SS_BITMAP,171,9,15,13
+    CONTROL         "",IDC_CHARTVIEWER2,"Static",SS_BITMAP,193,9,15,13
+    CONTROL         "",IDC_CHARTVIEWER3,"Static",SS_BITMAP,214,9,15,13
+    CONTROL         "",IDC_CHARTVIEWER4,"Static",SS_BITMAP,235,9,15,13
+    CONTROL         "",IDC_CHARTVIEWER5,"Static",SS_BITMAP,256,9,15,13
+    CONTROL         "",IDC_CHARTVIEWER6,"Static",SS_BITMAP,277,9,15,13
+    CONTROL         "",IDC_CHARTVIEWER7,"Static",SS_BITMAP,298,9,15,13
+    CONTROL         "",IDC_CHART_TREE,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | WS_BORDER | WS_HSCROLL | WS_TABSTOP,2,1,143,340
+END
+
+IDD_COMPAVERAGE DIALOGEX 0, 0, 653, 309
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Achievement Bar Graph"
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    CONTROL         "Pointer",IDC_PointerPB,"Static",BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE | WS_GROUP,8,8,72,18
+    CONTROL         "",IDC_ChartViewer,"Static",SS_BITMAP,88,4,15,13
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDFRAME,4,4,80,302
+    CTEXT           "",IDC_STATIC,12,136,64,8
+    CONTROL         "",IDC_ViewPortControl,"Static",SS_BITMAP,7,208,15,13
+    PUSHBUTTON      "Save As File",IDC_SavePB,7,80,73,18,BS_ICON
+END
+
+IDD_SECTIONAVERAGE DIALOGEX 0, 0, 653, 309
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Achievement Bar Graph"
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    CONTROL         "Pointer",IDC_PointerPB,"Static",BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE | WS_GROUP,8,8,72,18
+    CONTROL         "",IDC_ChartViewer,"Static",SS_BITMAP,88,4,15,13
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDFRAME,4,4,80,302
+    CTEXT           "",IDC_STATIC,12,136,64,8
+    CONTROL         "",IDC_ViewPortControl,"Static",SS_BITMAP,7,208,15,13
+    PUSHBUTTON      "Save As File",IDC_SavePB,7,80,73,18,BS_ICON
+END
+
+IDD_COMPSCORE DIALOGEX 0, 0, 653, 309
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Achievement Bar Graph"
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    CONTROL         "Pointer",IDC_PointerPB,"Static",BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE | WS_GROUP,8,8,72,18
+    CONTROL         "",IDC_ChartViewer,"Static",SS_BITMAP,88,4,15,13
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDFRAME,4,4,80,302
+    CTEXT           "",IDC_STATIC,12,136,64,8
+    CONTROL         "",IDC_ViewPortControl,"Static",SS_BITMAP,7,208,15,13
+    PUSHBUTTON      "Save As File",IDC_SavePB,7,80,73,18,BS_ICON
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 7,0,0,0
+ PRODUCTVERSION 7,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Advanced Software Engineering Ltd"
+            VALUE "FileDescription", "ChartDirector for C++ MFC Sample Program"
+            VALUE "FileVersion", "7.0.0.0"
+            VALUE "InternalName", "mfcdemo.exe"
+            VALUE "LegalCopyright", "(c) Advanced Software Engineering Ltd"
+            VALUE "OriginalFilename", "mfcdemo.exe"
+            VALUE "ProductName", "ChartDirector for C++ MFC Sample Program"
+            VALUE "ProductVersion", "7.0.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_MFCDEMO_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 749
+        TOPMARGIN, 1
+        BOTTOMMARGIN, 341
+    END
+
+    IDD_CONTOURZOOMSCROLL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 446
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 305
+    END
+
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// PNG
+//
+
+//BG.PNG                  PNG                     "res\\bg.png" 
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_MFCDEMO_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_CONTOURZOOMSCROLL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+// IDD_REALTIMEMULTICHART DLGINIT
+// BEGIN
+    // IDC_UpdatePeriod, 0x403, 4, 0
+// 0x3532, 0x0030, 
+    // IDC_UpdatePeriod, 0x403, 4, 0
+// 0x3035, 0x0030, 
+    // IDC_UpdatePeriod, 0x403, 4, 0
+// 0x3537, 0x0030, 
+    // IDC_UpdatePeriod, 0x403, 5, 0
+// 0x3031, 0x3030, "\000" 
+    // IDC_UpdatePeriod, 0x403, 5, 0
+// 0x3231, 0x3035, "\000" 
+    // IDC_UpdatePeriod, 0x403, 5, 0
+// 0x3531, 0x3030, "\000" 
+    // IDC_UpdatePeriod, 0x403, 5, 0
+// 0x3731, 0x3035, "\000" 
+    // IDC_UpdatePeriod, 0x403, 5, 0
+// 0x3032, 0x3030, "\000" 
+    // 0
+// END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\mfcdemo.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"     // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
