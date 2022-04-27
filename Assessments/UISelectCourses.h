@@ -21,7 +21,7 @@ namespace Assessments {
 
 	public:
 
-		   cliext::vector<String^> courseTeachers;	// Vector of strings to store course teacher names
+		cliext::vector<String^> courseTeachers;	// Vector of strings to store course teacher names
 
 		UISelectCourses(std::string* authIn, std::string* userNameIn, std::vector<int>* courseNumsIn);
 
@@ -38,7 +38,7 @@ namespace Assessments {
 	private: System::Windows::Forms::Label^ instructorLabel;
 	private: System::Windows::Forms::Label^ semesterLabel;
 	private: System::Windows::Forms::Label^ coursesLabel;
-	private: System::Windows::Forms::Label^ addedCoursesLabel ;
+	private: System::Windows::Forms::Label^ addedCoursesLabel;
 	private: System::Windows::Forms::ComboBox^ semesterCombo;
 	private: System::Windows::Forms::Button^ selAllBut;
 	private: System::Windows::Forms::Button^ remAllBut;
@@ -47,7 +47,7 @@ namespace Assessments {
 
 	private:
 		// Required designer variable.
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 		// DO NOT MODIFY
 #pragma region Windows Form Designer generated code
@@ -65,7 +65,7 @@ namespace Assessments {
 			this->instructorLabel = (gcnew System::Windows::Forms::Label());
 			this->semesterLabel = (gcnew System::Windows::Forms::Label());
 			this->coursesLabel = (gcnew System::Windows::Forms::Label());
-			this->addedCoursesLabel  = (gcnew System::Windows::Forms::Label());
+			this->addedCoursesLabel = (gcnew System::Windows::Forms::Label());
 			this->selAllBut = (gcnew System::Windows::Forms::Button());
 			this->remAllBut = (gcnew System::Windows::Forms::Button());
 			this->searchBut = (gcnew System::Windows::Forms::Button());
@@ -151,15 +151,15 @@ namespace Assessments {
 			// 
 			// Added Courses Label 
 			// 
-			this->addedCoursesLabel ->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->addedCoursesLabel ->AutoSize = true;
-			this->addedCoursesLabel ->BackColor = System::Drawing::Color::White;
-			this->addedCoursesLabel ->Location = System::Drawing::Point(130, 310);
-			this->addedCoursesLabel ->Name = L"addedCoursesLabel ";
-			this->addedCoursesLabel ->Size = System::Drawing::Size(82, 13);
-			this->addedCoursesLabel ->TabIndex = 8;
-			this->addedCoursesLabel ->Text = L"Added Courses:";
-			this->addedCoursesLabel ->Click += gcnew System::EventHandler(this, &UISelectCourses::addedCoursesLabel_Click);
+			this->addedCoursesLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->addedCoursesLabel->AutoSize = true;
+			this->addedCoursesLabel->BackColor = System::Drawing::Color::White;
+			this->addedCoursesLabel->Location = System::Drawing::Point(130, 310);
+			this->addedCoursesLabel->Name = L"addedCoursesLabel ";
+			this->addedCoursesLabel->Size = System::Drawing::Size(82, 13);
+			this->addedCoursesLabel->TabIndex = 8;
+			this->addedCoursesLabel->Text = L"Added Courses:";
+			this->addedCoursesLabel->Click += gcnew System::EventHandler(this, &UISelectCourses::addedCoursesLabel_Click);
 			// 
 			// Select All Button
 			// 
@@ -209,7 +209,7 @@ namespace Assessments {
 			this->Controls->Add(this->searchBut);
 			this->Controls->Add(this->remAllBut);
 			this->Controls->Add(this->selAllBut);
-			this->Controls->Add(this->addedCoursesLabel );
+			this->Controls->Add(this->addedCoursesLabel);
 			this->Controls->Add(this->coursesLabel);
 			this->Controls->Add(this->semesterLabel);
 			this->Controls->Add(this->instructorLabel);
@@ -229,17 +229,14 @@ namespace Assessments {
 
 		// Auto generated code by double clicking button in UIForm
 	private: System::Void addedCoursesLabel_Click(System::Object^ sender, System::EventArgs^ e) {
-		std::string test = "test";
 	}
-private: System::Void searchBut_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void instructorCombo_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-	std::string test = "test";
-}
-private: System::Void addedCourCLB_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-	std::string test = "test";
-}
-private: System::Void instructorLabel_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-};
+	private: System::Void searchBut_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void instructorCombo_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void addedCourCLB_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void instructorLabel_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	};
 }

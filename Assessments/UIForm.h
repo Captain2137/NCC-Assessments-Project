@@ -37,7 +37,7 @@ namespace Assessments {
 
 	private:
 		// Required designer variable.
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 		// DO NOT MODIFY
 #pragma region Windows Form Designer generated code
@@ -58,7 +58,7 @@ namespace Assessments {
 			this->enterBtn->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
 			this->enterBtn->AutoSize = true;
 			this->enterBtn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-			static_cast<System::Byte>(0)));
+				static_cast<System::Byte>(0)));
 			this->enterBtn->ForeColor = System::Drawing::SystemColors::ControlText;
 			this->enterBtn->Location = System::Drawing::Point(489, 283);
 			this->enterBtn->Margin = System::Windows::Forms::Padding(2);
@@ -92,7 +92,7 @@ namespace Assessments {
 			this->canvasTokenLabel->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
 			this->canvasTokenLabel->AutoSize = true;
 			this->canvasTokenLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-			static_cast<System::Byte>(0)));
+				static_cast<System::Byte>(0)));
 			this->canvasTokenLabel->Location = System::Drawing::Point(61, 284);
 			this->canvasTokenLabel->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->canvasTokenLabel->MaximumSize = System::Drawing::Size(173, 44);
@@ -116,7 +116,7 @@ namespace Assessments {
 			this->Controls->Add(this->authKey);
 			this->Controls->Add(this->enterBtn);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-			static_cast<System::Byte>(0)));
+				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(2);
@@ -128,10 +128,10 @@ namespace Assessments {
 		}
 #pragma endregion
 
-// Auto generated code by double clicking button in UIForm
-private: System::Void enterBtn_Click(System::Object^ sender, System::EventArgs^ e);
+		// Auto generated code by double clicking button in UIForm
+	private: System::Void enterBtn_Click(System::Object^ sender, System::EventArgs^ e);
 
-private: System::Void canvasTokenLabel_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-};
+	private: System::Void canvasTokenLabel_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	};
 }
