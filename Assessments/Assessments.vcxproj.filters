@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Graphing">
-      <UniqueIdentifier>{03f40cf6-9c3c-4052-9ee3-700b4fdec143}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Graphing">
-      <UniqueIdentifier>{f22bf9d2-8a0a-4148-a08e-a51f1879c1e8}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CourseData.cpp">
@@ -56,89 +50,10 @@
     <ClInclude Include="VisualizationForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="graphing\ChartViewer.h">
-      <Filter>Header Files\Graphing</Filter>
-    </ClInclude>
-    <ClInclude Include="graphing\CompAverage.h">
-      <Filter>Header Files\Graphing</Filter>
-    </ClInclude>
-    <ClInclude Include="graphing\CompScore.h">
-      <Filter>Header Files\Graphing</Filter>
-    </ClInclude>
-    <ClInclude Include="graphing\mfccharts.h">
-      <Filter>Header Files\Graphing</Filter>
-    </ClInclude>
-    <ClInclude Include="graphing\mfcdemo.h">
-      <Filter>Header Files\Graphing</Filter>
-    </ClInclude>
-    <ClInclude Include="graphing\mfcdemoDlg.h">
-      <Filter>Header Files\Graphing</Filter>
-    </ClInclude>
-    <ClInclude Include="graphing\resource.h">
-      <Filter>Header Files\Graphing</Filter>
-    </ClInclude>
-    <ClInclude Include="graphing\SectionAverage.h">
-      <Filter>Header Files\Graphing</Filter>
-    </ClInclude>
-    <ClInclude Include="graphing\stdafx.h">
-      <Filter>Header Files\Graphing</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\mfcdemo.rc2">
-      <Filter>Resource Files\Graphing</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="res\barchart.ico">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-    <Image Include="res\bubblechart.ico">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-    <Image Include="res\mfcdemo.ico">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-    <Image Include="res\pointerPB.ico">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-    <Image Include="res\robot1.png">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-    <Image Include="res\robot2.png">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-    <Image Include="res\robot3.png">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-    <Image Include="res\robot4.png">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-    <Image Include="res\robot5.png">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-    <Image Include="res\savePB.ico">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-    <Image Include="res\xychart.ico">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-    <Image Include="res\zoomchart.ico">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-    <Image Include="res\zoomInPB.ico">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-    <Image Include="res\zoomOutPB.ico">
-      <Filter>Resource Files\Graphing</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="graphing\mfcdemo.rc">
-      <Filter>Resource Files\Graphing</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include "UISelectCourses.h"
 #include "Util.h"
 #include <iostream>
+#include <algorithm>
 #include <nlohmann/json.hpp>    // Needed to read data fetched from online servers
 #include <msclr/marshal_cppstd.h>   // Needed to convert String^ to String
 
@@ -9,23 +10,31 @@ Assessments::UISelectCourses::UISelectCourses(std::string* authIn, std::string* 
 	userName = userNameIn;		// Set userName pointer to given address
 	courseNums = courseNumsIn;	// Set courseNums pointer to given address
 
-	// Get data from online server
-	nlohmann::json j = nlohmann::json::parse(util::curlRequest("https://canvas.nashuaweb.net/api/v1/accounts/self/courses?per_page=100&include[]=teachers&access_token=" + *auth));
-	// Change canvas.nashuaweb.net to canvas-prod.ccsnh.edu in final
-
-	
+	nlohmann::json id = nlohmann::json::parse(util::curlRequest("https://canvas.nashuaweb.net/api/v1/manageable_accounts?access_token=" + *auth));
 
 	// Debug: Print raw json with formating
-	std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;
+	//std::cout << "Raw Json:\n" << id.dump(4) << std::endl << std::endl;
 
-	if (j.contains("errors")) {	// If error, print error message(s)
-		std::cout << "Error: " << j["errors"][0]["message"].get<std::string>() << std::endl << std::endl;
-	} else {	// If success, get course ids
-		// Step through the received data and add each course id to courses
-		for (int i = 0; i < j.size(); i++) {
-			courseNums->push_back(j[i]["id"]);
-			courseNames.push_back(msclr::interop::marshal_as<String^>(j[i]["name"].get<std::string>()));
-			courseTeachers.push_back(msclr::interop::marshal_as<String^>(j[i]["teachers"][0]["display_name"].get<std::string>()));
+	for (int i = 0; i < id.size(); i++) {
+		// Get data from online server
+		nlohmann::json j = nlohmann::json::parse(util::curlRequest("https://canvas.nashuaweb.net/api/v1/accounts/" +
+			msclr::interop::marshal_as<std::string>(id[i]["id"].get<int>().ToString()) + "/courses?per_page=100&include[]=teachers&access_token=" + *auth));
+		// Change canvas.nashuaweb.net to canvas-prod.ccsnh.edu in final
+
+		// Debug: Print raw json with formating
+		//std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;
+
+		if (j.contains("errors")) {	// If error, print error message(s)
+			std::cout << "Error: " << j["errors"][0]["message"].get<std::string>() << std::endl << std::endl;
+		} else {	// If success, get course ids
+			// Step through the received data and add each course id to courses
+			for (int k = 0; k < j.size(); k++) {
+				if (std::find(courseNums->begin(), courseNums->end(), j[k]["id"]) == courseNums->end()) {
+					courseNums->push_back(j[k]["id"]);
+					courseNames.push_back(msclr::interop::marshal_as<String^>(j[k]["name"].get<std::string>()));
+					courseTeachers.push_back(msclr::interop::marshal_as<String^>(j[k]["teachers"][0]["display_name"].get<std::string>()));
+				}
+			}
 		}
 	}
 

@@ -48,13 +48,6 @@ int main() {
     std::vector<CourseData> courses;    // Vector array holding course data for each course
     std::string auth;                   // String holding authorization key
 
-    // Debug: Read in test CSV
-    if (readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv"))
-        return EXIT_FAILURE;
-
-    // Debug: Read in same test CSV for total.csv test
-    readCSV(&courses, "2022-Spring-CSCI285N-63925-A-Betsy Gamrat.csv");
-
     // Set Windows Form Styles
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
@@ -236,7 +229,7 @@ void getData(std::vector<CourseData>* courses, std::vector<int>* courseNums, std
         // Change canvas.nashuaweb.net to canvas-prod.ccsnh.edu in final
 
         // Debug: Print raw json with formating
-        std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;
+        //std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;
 
         if (j.contains("errors")) {	// If error, print error message(s)
             std::cout << "Error: " << j["errors"][0]["message"].get<std::string>() << std::endl << std::endl;
@@ -257,7 +250,7 @@ void getData(std::vector<CourseData>* courses, std::vector<int>* courseNums, std
             // Change canvas.nashuaweb.net to canvas-prod.ccsnh.edu in final
 
             // Debug: Print raw json with formating
-            std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;
+            //std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;
 
             if (j.contains("errors")) {	// If error, print error message(s)
                 std::cout << "Error: " << j["errors"][0]["message"].get<std::string>() << std::endl << std::endl;
