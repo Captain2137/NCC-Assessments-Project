@@ -30,6 +30,7 @@
 #include <sstream>      // Needed for stringstream
 #include <nlohmann/json.hpp>    // Needed to read data fetched from online servers
 #include <msclr/marshal_cppstd.h>   // Needed to convert String^ to String
+#include <chartdirector/chartdir.h> // Needed for graphing library
 
 // Needed for Windows Form
 using namespace System;
