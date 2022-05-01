@@ -124,7 +124,6 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="UIForm.cpp" />
     <ClCompile Include="UISelectCourses.cpp" />
-    <ClCompile Include="VisualizationForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CourseData.h" />
@@ -133,9 +132,6 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="UISelectCourses.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="VisualizationForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -152,9 +148,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UISelectCourses.resx">
       <DependentUpon>UISelectCourses.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VisualizationForm.resx">
-      <DependentUpon>VisualizationForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

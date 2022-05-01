@@ -30,9 +30,6 @@
     <ClCompile Include="UISelectCourses.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VisualizationForm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CourseData.h">
@@ -45,9 +42,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UISelectCourses.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VisualizationForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

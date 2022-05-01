@@ -3,6 +3,9 @@
 #include <vector>
 
 namespace util {
-    std::string curlRequest(std::string url);   // Get data from online servers from given URL
-    std::vector<std::vector<double>> calcData(std::vector<std::vector<double>>);    // Calculates the course data
+    // Get data from online servers from given URL
+    std::string curlRequest(std::string url);
+
+    // Calculates the course data
+    std::vector<std::vector<double>> calcData(const std::vector<std::vector<double>>* courseData);
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include <string>
-#include <cliext/vector>
 
 namespace Assessments {
 	// Needed for windows forms
@@ -14,19 +13,17 @@ namespace Assessments {
 
 	public ref class UISelectCourses : public System::Windows::Forms::Form {
 	public:
-		std::string* auth;				// Pointer to given string to store authorisation key
-		std::string* userName;			// Pointer to given string to store user name
-		std::vector<int>* courseNums;	// Pointer to given vector of ints to store course ids
-		cliext::vector<String^> courseNames;	// Vector of strings to store course names
+		std::vector<int>* courseNums;			// Pointer to given vector of ints to store course ids
+		std::vector<std::string>* courseNames;	// Vector of strings to store course names
+		std::vector<std::string>* courseProfs;	// Vector of strings to store course teacher names
 
-	public:
-
-		cliext::vector<String^> courseTeachers;	// Vector of strings to store course teacher names
-
-		UISelectCourses(std::string* authIn, std::string* userNameIn, std::vector<int>* courseNumsIn);
+		// Constructor
+		UISelectCourses(const std::vector<int>* accountIds, const std::string* auth,
+			std::vector<int>* courseNumsIn, std::vector<std::string>* courseNamesIn,
+			std::vector<std::string>* courseProfsIn);
 
 	protected:
-		~UISelectCourses() {
+		~UISelectCourses() {	// Deconstructor
 			if (components)
 				delete components;
 		}
@@ -80,7 +77,6 @@ namespace Assessments {
 			this->addedCourCLB->Name = L"addedCourCLB";
 			this->addedCourCLB->Size = System::Drawing::Size(605, 184);
 			this->addedCourCLB->TabIndex = 0;
-			this->addedCourCLB->SelectedIndexChanged += gcnew System::EventHandler(this, &UISelectCourses::addedCourCLB_SelectedIndexChanged);
 			// 
 			// Add Instructor Box 
 			// 
@@ -92,7 +88,6 @@ namespace Assessments {
 			this->instructorCombo->Name = L"instructorCombo";
 			this->instructorCombo->Size = System::Drawing::Size(214, 21);
 			this->instructorCombo->TabIndex = 2;
-			this->instructorCombo->SelectedIndexChanged += gcnew System::EventHandler(this, &UISelectCourses::instructorCombo_SelectedIndexChanged);
 			// 
 			// Add Semester Combo Box
 			// 
@@ -125,7 +120,6 @@ namespace Assessments {
 			this->instructorLabel->Size = System::Drawing::Size(73, 13);
 			this->instructorLabel->TabIndex = 5;
 			this->instructorLabel->Text = L"Add Instructor";
-			this->instructorLabel->Click += gcnew System::EventHandler(this, &UISelectCourses::instructorLabel_Click);
 			// 
 			// Add Semester Label 
 			// 
@@ -159,7 +153,6 @@ namespace Assessments {
 			this->addedCoursesLabel->Size = System::Drawing::Size(82, 13);
 			this->addedCoursesLabel->TabIndex = 8;
 			this->addedCoursesLabel->Text = L"Added Courses:";
-			this->addedCoursesLabel->Click += gcnew System::EventHandler(this, &UISelectCourses::addedCoursesLabel_Click);
 			// 
 			// Select All Button
 			// 
@@ -196,7 +189,6 @@ namespace Assessments {
 			this->searchBut->TabIndex = 11;
 			this->searchBut->Text = L"Search";
 			this->searchBut->UseVisualStyleBackColor = false;
-			this->searchBut->Click += gcnew System::EventHandler(this, &UISelectCourses::searchBut_Click);
 			// 
 			// UISelectCourses
 			// 
@@ -228,15 +220,5 @@ namespace Assessments {
 #pragma endregion
 
 		// Auto generated code by double clicking button in UIForm
-	private: System::Void addedCoursesLabel_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void searchBut_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void instructorCombo_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void addedCourCLB_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void instructorLabel_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
 	};
 }

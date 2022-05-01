@@ -13,14 +13,14 @@ namespace Assessments {
 
 	public ref class UIForm : public System::Windows::Forms::Form {
 	public:
-		std::string* auth;		// Pointer to given string to store authorisation key
-		std::string* userName;	// Pointer to given string to store user name
+		std::vector<int>* accountIds;	// Pointer to given vector of ints to store account ids
+		std::string* auth;				// Pointer to given string to store authorisation key
 
-		UIForm(std::string* authIn, std::string* userNameIn) {	// Constructor
+		UIForm(std::vector<int>* accountIdsIn, std::string* authIn) {	// Constructor
 			InitializeComponent();
 
-			auth = authIn;			// Set auth pointer to given address
-			userName = userNameIn;	// Set userName pointer to given address
+			accountIds = accountIdsIn;	// Set accountIds pointer to given address
+			auth = authIn;				// Set auth pointer to given address
 		}
 
 	protected:
@@ -102,7 +102,6 @@ namespace Assessments {
 			this->canvasTokenLabel->TabIndex = 2;
 			this->canvasTokenLabel->Text = L"Canvas Token:";
 			this->canvasTokenLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->canvasTokenLabel->Click += gcnew System::EventHandler(this, &UIForm::canvasTokenLabel_Click);
 			// 
 			// UIForm
 			// 
@@ -130,8 +129,5 @@ namespace Assessments {
 
 		// Auto generated code by double clicking button in UIForm
 	private: System::Void enterBtn_Click(System::Object^ sender, System::EventArgs^ e);
-
-	private: System::Void canvasTokenLabel_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
 	};
 }
