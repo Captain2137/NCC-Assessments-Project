@@ -11,9 +11,25 @@ Assessments::UISelectCourses::UISelectCourses(const std::vector<int>* accountIds
     courseNames = courseNamesIn;	// Set courseNames pointer to given address
     courseProfs = courseProfsIn;	// Set courseProfs pointer to given address
 
+    // Get data from online server
+    nlohmann::json j = nlohmann::json::parse(util::curlRequest(
+        "https://canvas.nashuaweb.net/api/v1/courses?per_page=100&include[]=teachers&access_token=" + *auth));
+    // Change canvas.nashuaweb.net to canvas-prod.ccsnh.edu in final
+
+    // Debug: Print raw json with formating
+    //std::cout << "Raw Json:\n" << j.dump(4) << std::endl << std::endl;
+
+    if (!j.contains("errors")) {    // If no errors
+        for (int i = 0; i < j.size(); i++) {    // Step through the received data and add data
+            courseNums->push_back(j[i]["id"]);
+            courseNames->push_back(j[i]["name"]);
+            courseProfs->push_back(j[i]["teachers"][0]["display_name"]);
+        }
+    }
+
     for (int i = 0; i < accountIds->size(); i++) {	// Go through each id
         // Get data from online server
-        nlohmann::json j = nlohmann::json::parse(util::curlRequest("https://canvas.nashuaweb.net/api/v1/accounts/"
+        j = nlohmann::json::parse(util::curlRequest("https://canvas.nashuaweb.net/api/v1/accounts/"
             + msclr::interop::marshal_as<std::string>(accountIds->at(i).ToString())
             + "/courses?per_page=100&include[]=teachers&access_token=" + *auth));
         // Change canvas.nashuaweb.net to canvas-prod.ccsnh.edu in final
