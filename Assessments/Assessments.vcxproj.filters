@@ -30,6 +30,21 @@
     <ClCompile Include="UISelectCourses.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ChartViewer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CompAverageDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CompScoreDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SectionAverageDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CourseData.h">
@@ -44,5 +59,72 @@
     <ClInclude Include="UISelectCourses.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ChartViewer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CompAverage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CompScore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SectionAverage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\barchart.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bubblechart.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\mfcdemo.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\pointerPB.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\robot1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\robot2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\robot3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\robot4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\robot5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\savePB.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\xychart.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\zoomchart.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\zoomInPB.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\zoomOutPB.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\mfcdemo.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

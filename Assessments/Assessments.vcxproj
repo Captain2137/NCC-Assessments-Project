@@ -47,6 +47,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -92,8 +93,7 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\lib\chartdirector</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libcurl.dll.a;chartdir70.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -119,14 +119,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ChartViewer.cpp" />
+    <ClCompile Include="CompAverageDlg.cpp" />
+    <ClCompile Include="CompScoreDlg.cpp" />
     <ClCompile Include="CourseData.cpp" />
+    <ClCompile Include="SectionAverageDlg.cpp" />
+    <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="UIForm.cpp" />
     <ClCompile Include="UISelectCourses.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ChartViewer.h" />
+    <ClInclude Include="CompAverage.h" />
+    <ClInclude Include="CompScore.h" />
     <ClInclude Include="CourseData.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SectionAverage.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="UIForm.h">
       <FileType>CppForm</FileType>
@@ -149,6 +160,25 @@
     <EmbeddedResource Include="UISelectCourses.resx">
       <DependentUpon>UISelectCourses.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\barchart.ico" />
+    <Image Include="res\bubblechart.ico" />
+    <Image Include="res\mfcdemo.ico" />
+    <Image Include="res\pointerPB.ico" />
+    <Image Include="res\robot1.png" />
+    <Image Include="res\robot2.png" />
+    <Image Include="res\robot3.png" />
+    <Image Include="res\robot4.png" />
+    <Image Include="res\robot5.png" />
+    <Image Include="res\savePB.ico" />
+    <Image Include="res\xychart.ico" />
+    <Image Include="res\zoomchart.ico" />
+    <Image Include="res\zoomInPB.ico" />
+    <Image Include="res\zoomOutPB.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\mfcdemo.rc2" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
